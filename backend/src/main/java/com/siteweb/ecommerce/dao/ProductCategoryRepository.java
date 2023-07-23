@@ -1,10 +1,12 @@
-package com.formation.ecommerce.dao;
+package com.siteweb.ecommerce.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
-import com.formation.ecommerce.entity.ProductCategory;
+import com.siteweb.ecommerce.entity.ProductCategory;
 
+@CrossOrigin("http://localhost:4200")
 @RepositoryRestResource(collectionResourceRel = "productCategory", path ="product-category")
 public interface ProductCategoryRepository extends JpaRepository<ProductCategory, Long>{
 

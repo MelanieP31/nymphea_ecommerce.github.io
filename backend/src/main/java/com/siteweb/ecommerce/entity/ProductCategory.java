@@ -1,4 +1,4 @@
-package com.formation.ecommerce.entity;
+package com.siteweb.ecommerce.entity;
 
 import java.util.Set;
 

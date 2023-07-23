@@ -1,10 +1,10 @@
-package com.formation.ecommerce;
+package com.siteweb.ecommerce;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class EcommerceApplicationTests {
+class BackendApplicationTests {
 
 	@Test
 	void contextLoads() {
