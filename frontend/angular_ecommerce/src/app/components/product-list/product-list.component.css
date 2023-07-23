@@ -1,0 +1,23 @@
+table{
+    border : 1px solid black;
+    margin : 0;
+    padding : 0;
+    width : 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+table tr{
+    background-color: #dddddd34;
+    border : 1px solid #ccc;
+}
+table th, table td{
+    padding: 10px;
+   
+}
+table th{
+    text-transform: uppercase;
+}
+img{
+    height: 100px;
+}
+
