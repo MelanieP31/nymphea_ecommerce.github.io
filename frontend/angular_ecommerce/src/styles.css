@@ -1036,3 +1036,13 @@ footer ul li{
         padding:8px 0
     }
 }
+
+
+.container-fluid{
+    max-width: 100%;
+}
+.row{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+}
