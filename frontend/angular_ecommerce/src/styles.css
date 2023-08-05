@@ -723,6 +723,12 @@ table.table.table-bordered th{
 .detail-section{
     margin-top:60px
 }
+
+.detail-img{
+    padding-top: 100px;
+    width: 300px;
+    height: 350px;
+}
 /**/
 
 /* 
