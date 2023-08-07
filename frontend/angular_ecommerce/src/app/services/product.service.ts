@@ -10,50 +10,50 @@ import { ProductCategory } from '../common/product-category';
 })
 export class ProductService {
  
-  
-
   private baseUrl = 'http://localhost:8080/api/products';
-
   private categoryUrl = 'http://localhost:8080/api/product-category';
 
   constructor(private httpClient: HttpClient) { }
 
-  getProduct(theProductId: number) : Observable<Product>  {
+  // Retourne 1 produit par son Id
+  getProduct(theProductId: number) : Observable<Product>  { 
     const productUrl = `${this.baseUrl}/${theProductId}`;
-
     return this.httpClient.get<Product>(productUrl);
   }
 
+  //Rechercher un produit par sa catégorie
   getProductList(theCategoryId: number): Observable<Product[]> {
-
-    // need to build URL based on category id 
     const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${theCategoryId}`;
-    
     return this.getProducts(searchUrl);
- 
   }
 
+  //Recherche un produit par mot clé
   searchProducts(theKeyword: string) : Observable<Product[]>{
     const searchUrl =`${this.baseUrl}/search/findByNameContaining?name=${theKeyword}`;
-
     return this.getProducts(searchUrl);
   }
 
+  //Méthode retourne une liste de produits
   private getProducts(searchUrl: string): Observable<Product[]> {
     return this.httpClient.get<GetResponseProducts>(searchUrl).pipe(
       map(response => response._embedded.products)
     );
   }
 
-
+  //Retourne toutes les catégories
   getProductCategories(): Observable<ProductCategory[]> {
-
     return this.httpClient.get<GetResponseProductCategory>(this.categoryUrl).pipe(
       map(response => response._embedded.productCategory)
     );
   }
 
- 
+  
+  //Prise en charge de la pagination dans une liste de produits
+  getProductListPaginate(thePage: number, thePageSize : number, theCategoryId:number): Observable<GetResponseProducts> {
+    const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${theCategoryId}`
+                        +`&page=${thePage}&size=${thePageSize}`;
+    return this.httpClient.get<GetResponseProducts>(searchUrl);
+  }
 
 
 }
@@ -61,6 +61,12 @@ export class ProductService {
 interface GetResponseProducts {
   _embedded: {
     products: Product[];
+  },
+  page : { 
+    size : number,
+    totalElements : number, 
+    totaPages : number,
+    number : number
   }
 }
 
