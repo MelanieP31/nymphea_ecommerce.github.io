@@ -57,11 +57,13 @@ export class ProductListComponent implements OnInit {
       this.thePageNumber =1;
     }
 
-    this.productService.searchProducts(theKeyword).subscribe(
-      data => {
-        this.products = data;
-      }
-    )
+    this.previousKeyword = theKeyword;
+    console.log(`keyword=${theKeyword}, the PageNumber=${this.thePageNumber}`);
+
+
+    this.productService.searchProductsPaginate(this.thePageNumber -1,
+                                            this.thePageSize,
+                                            theKeyword).subscribe(this.processResult());
   }
 
   //afficher la liste produits en fonction id ou nom de catégorie
@@ -91,15 +93,9 @@ export class ProductListComponent implements OnInit {
     console.log(`currentCategoryId = ${this.currentCategoryId}, thePageNumber=${this.thePageNumber} `);
 
     //afficher la liste des produits et l'afficher avec une pagination (recup donnee du ProductService et les assigné en fonction du JSON (param cette class = param JSON))
-    this.productService.getProductListPaginate(this.thePageNumber-1, this.thePageSize, this.currentCategoryId).subscribe(
-      data => {
-        this.products = data._embedded.products;
-        this.thePageNumber = data.page.number +1;
-        this.thePageSize = data.page.size;
-        this.theTotalElements = data.page.totalElements;
-      }
-    );
-
+    this.productService.getProductListPaginate(this.thePageNumber-1, 
+                                              this.thePageSize, 
+                                              this.currentCategoryId).subscribe(this.processResult());
   }
 
   //Dropdown menu pour que l'utilisateur puisse choir le nombre d'item par page
@@ -108,6 +104,15 @@ export class ProductListComponent implements OnInit {
     this.thePageNumber =1;
     this.listProducts();
 
+  }
+
+  processResult(){
+    return(data:any) => {
+      this.products = data._embedded.products;
+      this.thePageNumber = data.page.number +1;
+      this.thePageSize = data.page.size;
+      this.theTotalElements = data.page.totalElements;
+    };
   }
 
 
