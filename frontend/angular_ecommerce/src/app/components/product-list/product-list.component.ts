@@ -10,11 +10,15 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProductListComponent implements OnInit {
 
-  products: Product[] = [];
-  currentCategoryId: number = 1;
-  currentCategoryName: string = "";
+  products: Product[] = []; 
   searchMode : boolean = false;
 
+  //Chercher par catégorie (et afficher nom de la categorie)
+  currentCategoryId: number = 1;
+  currentCategoryName: string = "";
+  //Reinitialisation page au changement de categorie
+  previousCategoryId: number = 1
+  
   //Afficher la pagination 
   thePageNumber : number = 1;
   thePageSize : number = 10;
@@ -41,7 +45,7 @@ export class ProductListComponent implements OnInit {
     }
   }
   
-  //Recherche par mot clé (recup mot clé - envoyé a la méthode dans service pour mapper les produits)
+  //Recherche par mot clé (recup mot clé - recup la méthode dans service pour mapper les produits)
   handleSearchProducts(){
     const theKeyword : string = this.route.snapshot.paramMap.get('keyword')!;
     this.productService.searchProducts(theKeyword).subscribe(
@@ -68,14 +72,16 @@ export class ProductListComponent implements OnInit {
       this.currentCategoryName = 'Books';
     }
 
-    // afficher la liste de produits (appeler la methode Productlist de Service et recup les "data" de cette méthode)
-    this.productService.getProductList(this.currentCategoryId).subscribe(
-      data => {
-        this.products = data;
-      }
-    )
+    //Changement de catgéorie : réinitialisement des pages à 1.
+    if(this.previousCategoryId != this.currentCategoryId){
+      this.thePageNumber =1;
+    }
 
-    //ajouter a cette liste de produits une pagination (recup donnee du ProductService et les assigné en fonction du JSON)
+    //Keeping track of category for debug purpose
+    this.previousCategoryId = this.currentCategoryId;
+    console.log(`currentCategoryId = ${this.currentCategoryId}, thePageNumber=${this.thePageNumber} `);
+
+    //afficher la liste des produits et l'afficher avec une pagination (recup donnee du ProductService et les assigné en fonction du JSON (param cette class = param JSON))
     this.productService.getProductListPaginate(this.thePageNumber-1, this.thePageSize, this.currentCategoryId).subscribe(
       data => {
         this.products = data._embedded.products;
@@ -84,6 +90,8 @@ export class ProductListComponent implements OnInit {
         this.theTotalElements = data.page.totalElements;
       }
     );
+
+ 
 
 
 
