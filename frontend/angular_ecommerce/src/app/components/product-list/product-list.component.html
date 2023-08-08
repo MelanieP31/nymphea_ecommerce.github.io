@@ -33,17 +33,29 @@
             </div>
 
             <!--pagination-->
-            <ul class="pagination-container">
-                <li class="pagination-number">
+            <div>
+                <div>
                     <ngb-pagination [(page)]="thePageNumber" 
                                 [pageSize]="thePageSize" 
                                 [collectionSize]="theTotalElements"
+                                [maxSize]="5"
+                                [boundaryLinks]="true"
                                 (pageChange)="listProducts()"
                                 class="pagination">
-                    </ngb-pagination>                               
-                </li>
+                    </ngb-pagination> 
 
-            </ul>
+                    <span> Page size </span>
+
+                    <select #myPageSelect (change)="updatePageSize(myPageSelect.value)">
+                        <option selected="true">5</option>
+                        <option>10</option>
+                        <option>20</option>
+                        <option>50</option>
+                    </select>
+                    
+                </div>
+
+            </div>
 
         </div>
     </div>

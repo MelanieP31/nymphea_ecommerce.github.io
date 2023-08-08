@@ -21,8 +21,11 @@ export class ProductListComponent implements OnInit {
   
   //Afficher la pagination 
   thePageNumber : number = 1;
-  thePageSize : number = 10;
+  thePageSize : number = 5;
   theTotalElements : number = 0; 
+
+  //Pagination pour la recherche par mot clé
+  previousKeyword : string ="";
 
   constructor(private productService: ProductService,
               private route: ActivatedRoute) { }
@@ -48,6 +51,12 @@ export class ProductListComponent implements OnInit {
   //Recherche par mot clé (recup mot clé - recup la méthode dans service pour mapper les produits)
   handleSearchProducts(){
     const theKeyword : string = this.route.snapshot.paramMap.get('keyword')!;
+
+    //remettre la page a 1 si nouveaux mot-clé
+    if(this.previousKeyword != theKeyword){
+      this.thePageNumber =1;
+    }
+
     this.productService.searchProducts(theKeyword).subscribe(
       data => {
         this.products = data;
@@ -91,9 +100,13 @@ export class ProductListComponent implements OnInit {
       }
     );
 
- 
+  }
 
-
+  //Dropdown menu pour que l'utilisateur puisse choir le nombre d'item par page
+  updatePageSize(pageSize:string){
+    this.thePageSize = +pageSize;
+    this.thePageNumber =1;
+    this.listProducts();
 
   }
 
