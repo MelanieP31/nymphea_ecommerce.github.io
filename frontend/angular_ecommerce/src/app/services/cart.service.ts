@@ -14,34 +14,53 @@ export class CartService {
 
   constructor() { }
 
+  //ajouter des items dans le panier
   addToCart(theCartItem: CartItem) {
-
-    // check if we already have the item in our cart
+    // 1 : Regarder si on a deja des items dans le panier
     let alreadyExistsInCart: boolean = false;
     let existingCartItem: CartItem = undefined!;
 
     if (this.cartItems.length > 0) {
-      // find the item in the cart based on item id
-
+      // 1-1 : On les retrouve en comprant les ID
       existingCartItem = this.cartItems.find(tempCartItem => tempCartItem.id === theCartItem.id)!;
-
-      // check if we found it
       alreadyExistsInCart = (existingCartItem != undefined);
     }
-
+    //si il existe deja un item alors on augmente sa quantité
     if (alreadyExistsInCart) {
-      // increment the quantity
       existingCartItem.quantity++;
     }
     else {
-      // just add the item to the array
+      // sinon on l'ajoute dans notre tableau d'items
       this.cartItems.push(theCartItem);
     }
 
-    // compute cart total price and total quantity
+    // on apelle un méthode qui calcul le total de quantité et le prix
     this.computeCartTotals();
   }
 
+  //Diminuer la quantité des items dans le panier (simple decrementation) si 0 = remove
+  decrementQuantity(theCartItem:CartItem){
+    theCartItem.quantity--;
+
+    if(theCartItem.quantity === 0){
+      this.remove(theCartItem);
+    }else{
+      this.computeCartTotals();
+    }
+  }
+
+    //Trouver ou il se trouve dans l'array (index)
+  remove(theCartItem: CartItem) {
+    const itemIndex = this.cartItems.findIndex(tempCartItem => tempCartItem.id == theCartItem.id);
+    //si trouvé (en pos 0 à x, donc sup -1) alors le suppr
+    if(itemIndex >-1){
+      this.cartItems.splice(itemIndex, 1);
+
+      this.computeCartTotals();
+    }
+  }
+
+  //Méthode math calcul prix et quantité total
   computeCartTotals() {
 
     let totalPriceValue: number = 0;
@@ -52,7 +71,7 @@ export class CartService {
       totalQuantityValue += currentCartItem.quantity;
     }
 
-    // publish the new values ... all subscribers will receive the new data
+    // On met a dispo ces data si on veut les recup : subscribe
     this.totalPrice.next(totalPriceValue);
     this.totalQuantity.next(totalQuantityValue);
 
