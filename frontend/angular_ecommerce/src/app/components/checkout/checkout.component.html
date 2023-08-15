@@ -1,0 +1,130 @@
+<div class="main-content page-m">
+
+
+    <form [formGroup]="checkoutFormGroup" (ngSubmit)="onSubmit()">
+
+        <!-- customer form group-->
+        <div formGroupName="customer" class="form-area">
+            <h3>Customer</h3>
+
+            <div class="row">
+                <div><label>First Name</label></div>
+                <input formControlName="firstName" type="text">
+
+                <div><label>Last Name</label></div>
+                <input formControlName="lastName" type="text">
+
+                <div><label>Email</label></div>
+                <input formControlName="email" type="text">
+            </div>
+
+        </div>
+
+        <!--Shipping adress-->
+
+        <div formGroupName="shippingAddress" class="form-area">
+            <h3>Shipping Address</h3>
+            <div class="row">
+                <div><label>Country</label></div>
+                <select formControlName="country">
+                    <option>USA</option>
+                    <option>France</option>
+                </select>
+
+                <div><label>Street</label></div>
+                <input formControlName="street" type="text">
+
+                <div><label>City</label></div>
+                <input formControlName="city" type="text">
+
+                <div><label>State</label></div>
+                <input formControlName="state" type="text">
+
+                <div><label>Zip Code</label></div>
+                <input formControlName="zipCode" type="text">
+            </div>
+        </div>
+
+        <!--Add copié shipping dans la billing adress-->
+        <div class="input-space" class="form-area">
+            <label class="au-checkbox">
+                <input type="checkbox" (change)="copyShippingAddressToBillingAddress($event)">
+                <span class="au-checkmark"></span>Billing Address same as Shipping Address
+            </label>
+        </div>
+
+        <!--Billing adress-->
+
+        <div formGroupName="billingAddress" class="form-area">
+            <h3>Billing Address</h3>
+            <div class="row">
+                <div><label>Country</label></div>
+                <select formControlName="country">
+                    <option>USA</option>
+                    <option>France</option>
+                </select>
+
+                <div><label>Street</label></div>
+                <input formControlName="street" type="text">
+
+                <div><label>City</label></div>
+                <input formControlName="city" type="text">
+
+                <div><label>State</label></div>
+                <input formControlName="state" type="text">
+
+                <div><label>Zip Code</label></div>
+                <input formControlName="zipCode" type="text">
+            </div>
+        </div>
+
+        <!--CreditCard-->
+        <div formGroupName="creditCard" class="form-area">
+            <h3>Credit Card</h3>
+            <div class="row">
+
+                <div><label>Card type</label></div>
+                <select formControlName="cardType">
+                    <option>Visa</option>
+                    <option>Mastercard</option>
+                </select>
+
+                <div><label>Name on the card</label></div>
+                <input formControlName="nameOnCard" type="text">
+
+                <div><label>Card Number</label></div>
+                <input formControlName="cardNumber" type="text">
+
+                <div><label>Security code</label></div>
+                <input formControlName="securityCode" type="text">
+
+                <div><label>Expiration Month</label></div>
+                <select formControlName="expirationMonth">
+                    <option *ngFor="let month of creditCardMonths">{{month}}</option>
+                </select>
+
+                <div><label>Expiration Year</label></div>
+                <select formControlName="expirationYear">
+                    <option *ngFor="let years of creditCardYears">{{years}}</option>
+                </select>
+            </div>
+        </div>
+
+        <!--Oder Details-->
+        <div class="form-area">
+            <h3> Review your order </h3>
+
+            <p>Total Quantity : {{totalQuantity}}</p>
+            <p>Shipping price : 0$ </p>
+            <p>Total Price : {{totalPrice | currency : 'USD'}}</p>
+        </div>
+
+
+
+        <!--Submit button-->
+        <div>
+            <button type="submit">Purchase</button>
+        </div>
+    </form>
+
+</div>
