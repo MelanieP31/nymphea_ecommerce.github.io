@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Country } from 'src/app/common/country';
+import { State } from 'src/app/common/state';
 import { CreditcardService } from 'src/app/services/creditcard.service';
 
 @Component({
@@ -18,6 +20,14 @@ export class CheckoutComponent implements OnInit {
   //Remplir mois et années
   creditCardYears : number[] = [];
   creditCardMonths : number[] = [];
+
+  //remplir les Pays et les regions
+  countries : Country[] = [];
+
+  shippingAdressStates : State[] = [];
+  billingAdressStates : State[] = [];
+
+
   
 
   constructor(private formBuilder : FormBuilder, private creditcardService : CreditcardService) { }
@@ -59,7 +69,6 @@ export class CheckoutComponent implements OnInit {
     //remplir les mois
     const startMonth : number = new Date().getMonth() + 1;
     console.log("start Month =" + startMonth);
-
     this.creditcardService.getCreditCardMonths(startMonth).subscribe(
       data => {
         console.log("Retrieved credit card months :" + JSON.stringify(data));
@@ -75,7 +84,37 @@ export class CheckoutComponent implements OnInit {
       }
     )
 
+    //les pays
+    this.creditcardService.getCountries().subscribe(
+      data => {
+        console.log("Retrieved countries :" + JSON.stringify(data));
+        this.countries = data;
+      }
+    )
 
+  }
+
+  //Recupérer les régions en fonctions du pays selectionner
+  getStates(formGroupName : string){
+    const formGroup = this.checkoutFormGroup.get(formGroupName)!;
+    const countryCode = formGroup.value.country.code;
+    const countryName = formGroup.value.country.name;
+
+    console.log(`${formGroupName} country code: ${countryCode}`);
+    console.log(`${formGroupName} country name: ${countryName}`);
+
+    this.creditcardService.getStates(countryCode).subscribe(
+      data =>{
+        if(formGroupName ==='shippingAddress'){
+            this.shippingAdressStates =data;
+        }else{
+          this.billingAdressStates = data;
+        }
+
+        //select forst items by default
+        formGroup.get('state')!.setValue(data[0]);
+      }
+    )
 
   }
   
@@ -84,9 +123,15 @@ export class CheckoutComponent implements OnInit {
     if (event.target.checked) {
       this.checkoutFormGroup.controls['billingAddress']
             .setValue(this.checkoutFormGroup.controls['shippingAddress'].value);
+
+      //bug code selection regions ne se copie pas
+      this.billingAdressStates = this.shippingAdressStates;
     }
     else {
       this.checkoutFormGroup.controls['billingAddress'].reset();
+
+      //clear out, reset
+      this.billingAdressStates = [];
     }
     
   }
@@ -95,6 +140,8 @@ export class CheckoutComponent implements OnInit {
   onSubmit(){
     console.log("submit button");
     console.log(this.checkoutFormGroup.get('customer')!.value);
+    console.log("shipping adress country :" +this.checkoutFormGroup.get('shippingAdress')!.value.country.name);
+    console.log("shipping adress state :" +this.checkoutFormGroup.get('shippingAdress')!.value.state.name);
   }
 
   handleMonthsAndYears(){
