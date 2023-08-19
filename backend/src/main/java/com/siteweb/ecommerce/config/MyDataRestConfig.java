@@ -13,6 +13,9 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
 import com.siteweb.ecommerce.entity.Product;
 import com.siteweb.ecommerce.entity.ProductCategory;
+import com.siteweb.ecommerce.entity.Country;
+import com.siteweb.ecommerce.entity.State;
+
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.metamodel.EntityType;
@@ -37,21 +40,21 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
 
 		//Desactive HTTP methods for Product : PUT POST et DELETE
 	
-		config.getExposureConfiguration()
-			.forDomainType(Product.class)
-			.withItemExposure((metdata, httpMethods)-> httpMethods.disable(theUnsupportedActions))
-			.withCollectionExposure((metdata, httpMethods)-> httpMethods.disable(theUnsupportedActions));
-			
-		//Desactive HTTP methods for ProductCategory : PUT POST et DELETE
-
-		config.getExposureConfiguration()
-			.forDomainType(ProductCategory.class)
-			.withItemExposure((metdata, httpMethods)-> httpMethods.disable(theUnsupportedActions))
-			.withCollectionExposure((metdata, httpMethods)-> httpMethods.disable(theUnsupportedActions));
+		disableHttpMethods(Product.class, config, theUnsupportedActions);			
+		disableHttpMethods(ProductCategory.class, config, theUnsupportedActions);
+		disableHttpMethods(Country.class, config, theUnsupportedActions);			
+		disableHttpMethods(State.class, config, theUnsupportedActions);
 			
 		
 		//call an internal helper method exposeId
 		exposeIds(config);
+	}
+
+	private void disableHttpMethods(Class theClass, RepositoryRestConfiguration config, HttpMethod[] theUnsupportedActions) {
+		config.getExposureConfiguration()
+			.forDomainType(theClass)			
+			.withItemExposure((metdata, httpMethods)-> httpMethods.disable(theUnsupportedActions))
+			.withCollectionExposure((metdata, httpMethods)-> httpMethods.disable(theUnsupportedActions));
 	}
 
 
