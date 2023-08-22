@@ -9,13 +9,45 @@
 
             <div class="row">
                 <div><label>First Name</label></div>
-                <input formControlName="firstName" type="text">
+                <div>
+                    <input formControlName="firstName" type="text">
+                    <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
+                        <div *ngIf="firstName.errors.required">
+                            FirstName is required
+                        </div>
+                        <div *ngIf="firstName.errors.minLength">
+                            FirstName must be at least 2 characters long
+                        </div>
+                    </div>
+                </div>      
 
                 <div><label>Last Name</label></div>
-                <input formControlName="lastName" type="text">
+                <div>
+                    <input formControlName="lastName" type="text">
+                    <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
+                        <div *ngIf="lastName.errors.required">
+                            Last Name is required
+                        </div>
+                        <div *ngIf="lastName.errors.minLength">
+                            Last Name must be at least 2 characters long
+                        </div>
+                    </div>
+
+                </div>        
 
                 <div><label>Email</label></div>
-                <input formControlName="email" type="text">
+                <div>
+                    <input formControlName="email" type="text">
+                    <div *ngIf="email.invalid && (email.dirty || email.touched)">
+                        <div *ngIf="email.errors.required">
+                            email is required
+                        </div>
+                        <div *ngIf="email.errors.pattern">
+                            Email must be a valid email adress format
+                        </div>
+                    </div>
+                </div>
+                
             </div>
 
         </div>

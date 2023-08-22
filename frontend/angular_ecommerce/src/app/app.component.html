@@ -1,37 +1,36 @@
-<div class="page-wrapper">
+<div class="app">
+  <header>
+    <nav>
 
-  <!-- MENU SIDEBAR-->
-  <app-product-category-menu></app-product-category-menu>
-  <!-- END MENU SIDEBAR-->
-
-  <!-- PAGE CONTAINER-->
-  <div class="page-container">
-    <!-- HEADER DESKTOP-->
-    <header class="header-desktop">
-      <div class="section-content section-content-p30">
-        <div class="container-fluid">
-          <div class="header-wrap">
-            
-            <app-search> </app-search>
-
-            <app-cart-status> </app-cart-status>
-            
-  
-          </div>
-          <div class="account-wrap"></div>
-        </div>
+      <div>
+        <a routerLink="/" class="logo">
+          <img src="assets/images/logo.png">
+        </a>
+        <span>L'atelier de Lili</span>
       </div>
-    </header>
-    <!-- END HEADER DESKTOP-->
 
-    <!-- MAIN CONTENT-->
-    
+      <div class="navlinks">
+        <a routerLink="/">Accueil</a>
+        <a routerLink="/products">Produits</a>
+        <a href="#">Blog</a>
+      </div>
+
+
+    </nav>
+  </header>
+
+
+  <main>
     <router-outlet> </router-outlet>
-    
+  </main>
 
 
-  </div>
 </div>
+
+
+
+
+
 
 <footer>
   <ul>
