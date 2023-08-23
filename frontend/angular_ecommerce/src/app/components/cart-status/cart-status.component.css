@@ -1,0 +1,30 @@
+.cart-container{
+    display:flex;
+}
+a{
+    text-decoration: none;
+    font-family: 'Raleway', sans-serif;
+}
+
+.cart-logo{
+    text-decoration: none;
+    font-size: 24px;
+    color: black;
+
+}
+
+.cart-quantity{
+    background-color: var(--main-pink);
+    border-radius:50%;
+    border:3px solid white;
+    min-width: 30px;
+    height:30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: -10px;
+    margin-left: -10px;
+
+}

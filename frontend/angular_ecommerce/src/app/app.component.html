@@ -1,23 +1,44 @@
 <div class="app">
-  <header>
-    <nav>
 
-      <div>
-        <a routerLink="/" class="logo">
-          <img src="assets/images/logo.png">
+  <nav>
+
+    <div class="logo">
+      <a routerLink="/">
+        <img src="assets/images/logo.png">
+      </a>
+      <span>L'atelier de Lili</span>
+    </div>
+  
+    <div class="navlinks">
+      <a routerLink="/">Accueil</a>
+      <a routerLink="/products">Produits</a>
+      <a href="#">Blog</a>
+
+    </div>
+  
+    <div class="navlogo-container">
+
+      <div class="navlogo">
+        <a href="#">
+          <i class="fa fa-phone" aria-hidden="true"></i>
         </a>
-        <span>L'atelier de Lili</span>
       </div>
 
-      <div class="navlinks">
-        <a routerLink="/">Accueil</a>
-        <a routerLink="/products">Produits</a>
-        <a href="#">Blog</a>
+      <div class="navlogo">
+        <a href="#">
+          <i class="fa fa-user" aria-hidden="true"></i>
+        </a>
       </div>
 
+      <div class="navlogo">
+        <app-cart-status> </app-cart-status>
+      </div>
+ 
+    
+    </div>
 
-    </nav>
-  </header>
+  </nav>
+
 
 
   <main>
@@ -31,11 +52,3 @@
 
 
 
-
-<footer>
-  <ul>
-    <li><a href="#">About Us</a></li>
-    <li><a href="#">Contact Us</a></li>
-    <li><a href="#">Help</a></li>
-  </ul>
-</footer>
