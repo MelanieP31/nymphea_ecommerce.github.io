@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { CreditcardService } from 'src/app/services/creditcard.service';
 import { Country } from 'src/app/common/country';
 import { State } from 'src/app/common/state';
-import { CreditcardService } from 'src/app/services/creditcard.service';
+import { SiteValidators} from 'src/app/validators/site-validators';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-checkout',
@@ -11,170 +13,225 @@ import { CreditcardService } from 'src/app/services/creditcard.service';
 })
 export class CheckoutComponent implements OnInit {
 
-  checkoutFormGroup !: FormGroup;
+  checkoutFormGroup: FormGroup;
 
-  //order details
-  totalPrice : number = 0;
-  totalQuantity : number = 0;
-
-  //Remplir mois et années
-  creditCardYears : number[] = [];
-  creditCardMonths : number[] = [];
-
-  //remplir les Pays et les regions
-  countries : Country[] = [];
-
-  shippingAdressStates : State[] = [];
-  billingAdressStates : State[] = [];
-
-
+  totalPrice: number = 0;
+  totalQuantity: number = 0;
   
+  creditCardYears: number[] = [];
+  creditCardMonths: number[] = [];
 
-  constructor(private formBuilder : FormBuilder, private creditcardService : CreditcardService) { }
+  countries: Country[] = [];
+
+  shippingAddressStates: State[] = [];
+  billingAddressStates: State[] = [];
+  
+  
+  constructor(private formBuilder: FormBuilder,
+              private creditCardService: CreditcardService,
+              private cartService: CartService) { }
 
   ngOnInit(): void {
+    
+    this.reviewCartDetails();
+
     this.checkoutFormGroup = this.formBuilder.group({
-      customer:this.formBuilder.group({
-        firstName : new FormControl('', [Validators.required, Validators.minLength(2)]),
-        lastName: new FormControl('', [Validators.required, Validators.minLength(2)]),
-        email:new FormControl('', 
+      customer: this.formBuilder.group({
+        firstName: new FormControl('', 
+                              [Validators.required, 
+                               Validators.minLength(2), 
+                               SiteValidators.notOnlyWhitespace]),
+
+        lastName:  new FormControl('', 
+                              [Validators.required, 
+                               Validators.minLength(2), 
+                               SiteValidators.notOnlyWhitespace]),
+                               
+        email: new FormControl('',
                               [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')])
       }),
-
-      shippingAddress:this.formBuilder.group({
-        country:[''],
-        street:[''],
-        city:[''],
-        state:[''],
-        zipCode:['']
+      shippingAddress: this.formBuilder.group({
+        street: new FormControl('', [Validators.required, Validators.minLength(2), 
+          SiteValidators.notOnlyWhitespace]),
+        city: new FormControl('', [Validators.required, Validators.minLength(2), 
+          SiteValidators.notOnlyWhitespace]),
+        state: new FormControl('', [Validators.required]),
+        country: new FormControl('', [Validators.required]),
+        zipCode: new FormControl('', [Validators.required, Validators.minLength(2), 
+          SiteValidators.notOnlyWhitespace])
       }),
-
-      billingAddress:this.formBuilder.group({
-        country:[''],
-        street:[''],
-        city:[''],
-        state:[''],
-        zipCode:['']
+      billingAddress: this.formBuilder.group({
+        street: new FormControl('', [Validators.required, Validators.minLength(2), 
+          SiteValidators.notOnlyWhitespace]),
+        city: new FormControl('', [Validators.required, Validators.minLength(2), 
+          SiteValidators.notOnlyWhitespace]),
+        state: new FormControl('', [Validators.required]),
+        country: new FormControl('', [Validators.required]),
+        zipCode: new FormControl('', [Validators.required, Validators.minLength(2), 
+          SiteValidators.notOnlyWhitespace])
       }),
-
-      creditCard:this.formBuilder.group({
-        cardType:[''],
-        nameOnCard:[''],
-        cardNumber:[''],
-        securityCode:[''],
-        expirationMonth:[''],
-        expirationYear:['']
+      creditCard: this.formBuilder.group({
+        cardType: new FormControl('', [Validators.required]),
+        nameOnCard:  new FormControl('', [Validators.required, Validators.minLength(2), 
+          SiteValidators.notOnlyWhitespace]),
+        cardNumber: new FormControl('', [Validators.required, Validators.pattern('[0-9]{16}')]),
+        securityCode: new FormControl('', [Validators.required, Validators.pattern('[0-9]{3}')]),
+        expirationMonth: [''],
+        expirationYear: ['']
       })
     });
 
-    //remplir les mois
-    const startMonth : number = new Date().getMonth() + 1;
-    console.log("start Month =" + startMonth);
-    this.creditcardService.getCreditCardMonths(startMonth).subscribe(
+    // populate credit card months
+
+    const startMonth: number = new Date().getMonth() + 1;
+    console.log("startMonth: " + startMonth);
+
+    this.creditCardService.getCreditCardMonths(startMonth).subscribe(
       data => {
-        console.log("Retrieved credit card months :" + JSON.stringify(data));
+        console.log("Retrieved credit card months: " + JSON.stringify(data));
         this.creditCardMonths = data;
       }
-    )
+    );
 
-    //les années
-    this.creditcardService.getCreditCardYears().subscribe(
+    // populate credit card years
+
+    this.creditCardService.getCreditCardYears().subscribe(
       data => {
-        console.log("Retrieved credit card years :" + JSON.stringify(data));
+        console.log("Retrieved credit card years: " + JSON.stringify(data));
         this.creditCardYears = data;
       }
-    )
+    );
 
-    //les pays
-    this.creditcardService.getCountries().subscribe(
+    // populate countries
+
+    this.creditCardService.getCountries().subscribe(
       data => {
-        console.log("Retrieved countries :" + JSON.stringify(data));
+        console.log("Retrieved countries: " + JSON.stringify(data));
         this.countries = data;
       }
-    )
+    );
+  }
+
+  reviewCartDetails() {
+
+    // subscribe to cartService.totalQuantity
+    this.cartService.totalQuantity.subscribe(
+      totalQuantity => this.totalQuantity = totalQuantity
+    );
+
+    // subscribe to cartService.totalPrice
+    this.cartService.totalPrice.subscribe(
+      totalPrice => this.totalPrice = totalPrice
+    );
 
   }
 
-  //Recupérer les régions en fonctions du pays selectionner
-  getStates(formGroupName : string){
-    const formGroup = this.checkoutFormGroup.get(formGroupName)!;
+  get firstName() { return this.checkoutFormGroup.get('customer.firstName'); }
+  get lastName() { return this.checkoutFormGroup.get('customer.lastName'); }
+  get email() { return this.checkoutFormGroup.get('customer.email'); }
+
+  get shippingAddressStreet() { return this.checkoutFormGroup.get('shippingAddress.street'); }
+  get shippingAddressCity() { return this.checkoutFormGroup.get('shippingAddress.city'); }
+  get shippingAddressState() { return this.checkoutFormGroup.get('shippingAddress.state'); }
+  get shippingAddressZipCode() { return this.checkoutFormGroup.get('shippingAddress.zipCode'); }
+  get shippingAddressCountry() { return this.checkoutFormGroup.get('shippingAddress.country'); }
+
+  get billingAddressStreet() { return this.checkoutFormGroup.get('billingAddress.street'); }
+  get billingAddressCity() { return this.checkoutFormGroup.get('billingAddress.city'); }
+  get billingAddressState() { return this.checkoutFormGroup.get('billingAddress.state'); }
+  get billingAddressZipCode() { return this.checkoutFormGroup.get('billingAddress.zipCode'); }
+  get billingAddressCountry() { return this.checkoutFormGroup.get('billingAddress.country'); }
+
+  get creditCardType() { return this.checkoutFormGroup.get('creditCard.cardType'); }
+  get creditCardNameOnCard() { return this.checkoutFormGroup.get('creditCard.nameOnCard'); }
+  get creditCardNumber() { return this.checkoutFormGroup.get('creditCard.cardNumber'); }
+  get creditCardSecurityCode() { return this.checkoutFormGroup.get('creditCard.securityCode'); }
+
+
+
+  copyShippingAddressToBillingAddress(event) {
+
+    if (event.target.checked) {
+      this.checkoutFormGroup.controls.billingAddress
+            .setValue(this.checkoutFormGroup.controls.shippingAddress.value);
+
+      // bug fix for states
+      this.billingAddressStates = this.shippingAddressStates;
+
+    }
+    else {
+      this.checkoutFormGroup.controls.billingAddress.reset();
+
+      // bug fix for states
+      this.billingAddressStates = [];
+    }
+    
+  }
+
+  onSubmit() {
+    console.log("Handling the submit button");
+
+    if (this.checkoutFormGroup.invalid) {
+      this.checkoutFormGroup.markAllAsTouched();
+    }
+
+    console.log(this.checkoutFormGroup.get('customer').value);
+    console.log("The email address is " + this.checkoutFormGroup.get('customer').value.email);
+  
+    console.log("The shipping address country is " + this.checkoutFormGroup.get('shippingAddress').value.country.name);
+    console.log("The shipping address state is " + this.checkoutFormGroup.get('shippingAddress').value.state.name);
+  
+  }
+
+  handleMonthsAndYears() {
+
+    const creditCardFormGroup = this.checkoutFormGroup.get('creditCard');
+
+    const currentYear: number = new Date().getFullYear();
+    const selectedYear: number = Number(creditCardFormGroup.value.expirationYear);
+
+    // if the current year equals the selected year, then start with the current month
+
+    let startMonth: number;
+
+    if (currentYear === selectedYear) {
+      startMonth = new Date().getMonth() + 1;
+    }
+    else {
+      startMonth = 1;
+    }
+
+    this.creditCardService.getCreditCardMonths(startMonth).subscribe(
+      data => {
+        console.log("Retrieved credit card months: " + JSON.stringify(data));
+        this.creditCardMonths = data;
+      }
+    );
+  }
+
+  getStates(formGroupName: string) {
+
+    const formGroup = this.checkoutFormGroup.get(formGroupName);
+
     const countryCode = formGroup.value.country.code;
     const countryName = formGroup.value.country.name;
 
     console.log(`${formGroupName} country code: ${countryCode}`);
     console.log(`${formGroupName} country name: ${countryName}`);
 
-    this.creditcardService.getStates(countryCode).subscribe(
-      data =>{
-        if(formGroupName ==='shippingAddress'){
-            this.shippingAdressStates =data;
-        }else{
-          this.billingAdressStates = data;
+    this.creditCardService.getStates(countryCode).subscribe(
+      data => {
+
+        if (formGroupName === 'shippingAddress') {
+          this.shippingAddressStates = data; 
+        }
+        else {
+          this.billingAddressStates = data;
         }
 
-        //select forst items by default
-        formGroup.get('state')!.setValue(data[0]);
+        // select first item by default
+        formGroup.get('state').setValue(data[0]);
       }
-    )
-
+    );
   }
-
-  //Getter Méthodes
-  get firstName () {return this.checkoutFormGroup.get('customer.firstName');}
-  get lastName () {return this.checkoutFormGroup.get('customer.lastName');}
-  get email () {return this.checkoutFormGroup.get('customer.email');}
-
-  
-  copyShippingAddressToBillingAddress(event:any) {
-
-    if (event.target.checked) {
-      this.checkoutFormGroup.controls['billingAddress']
-            .setValue(this.checkoutFormGroup.controls['shippingAddress'].value);
-
-      //bug code selection regions ne se copie pas
-      this.billingAdressStates = this.shippingAdressStates;
-    }
-    else {
-      this.checkoutFormGroup.controls['billingAddress'].reset();
-
-      //clear out, reset
-      this.billingAdressStates = [];
-    }
-    
-  }
-
-
-  onSubmit(){
-    console.log("submit button");
-
-    if(this.checkoutFormGroup.invalid){
-      this.checkoutFormGroup.markAllAsTouched();
-    }
-    console.log(this.checkoutFormGroup.get('customer')!.value);
-    console.log("shipping adress country :" +this.checkoutFormGroup.get('shippingAdress')!.value.country.name);
-    console.log("shipping adress state :" +this.checkoutFormGroup.get('shippingAdress')!.value.state.name);
-  }
-
-  handleMonthsAndYears(){
-    const creditCardFormGroup = this.checkoutFormGroup.get('creditCard');
-
-    const currentYear : number = new Date().getFullYear();
-    const selectedYear : number = Number(creditCardFormGroup?.value.expirationYear);
-
-    let startMonth:number;
-
-    if(currentYear == selectedYear){
-      startMonth = new Date().getMonth() + 1;
-    }else{
-      startMonth =1;
-    }
-
-    this.creditcardService.getCreditCardMonths(startMonth).subscribe(
-      data => {
-        console.log("Retrieved credit card months : " + JSON.stringify(data));
-        this.creditCardMonths = data;
-      }
-    )
-  }
-
 }

@@ -2,17 +2,18 @@ import { FormControl, ValidationErrors } from "@angular/forms";
 
 export class SiteValidators {
 
-    //whitespace
-    static notOnlyWhitespace(control : FormControl) : ValidationErrors {
+    // whitespace validation
+    static notOnlyWhitespace(control: FormControl) : ValidationErrors {
+        
+        // check if string only contains whitespace
+        if ((control.value != null) && (control.value.trim().length === 0)) {
 
-        if((control.value != null) && (control.value.trim().lenght===0)){
-            return {'notOnlyWhitespace':true};
-        }else{
+            // invalid, return error object
+            return { 'notOnlyWhitespace': true };
+        }
+        else {
+            // valid, return null
             return null;
         }
-
-
-        
-        
     }
 }
