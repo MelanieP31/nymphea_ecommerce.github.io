@@ -28,31 +28,78 @@
     <section class="logo">
 
         <div class="logo-container">
-            <div class="logo-container-unit">
-                <img src="../../../assets/images/icon/france.png">
-                <h3>Fabriqué en France </h3>
-                <p>Dans le sud de la France excatement !</p>
+            <div class = "logo-container-border">
+                <div class="logo-container-unit">
+                    <img src="../../../assets/images/icon/france.png">
+                    <h4>Fabriqué en France </h4>
+                    <p>Dans le sud de la France</p>
+                </div>               
             </div>
 
-            <div class="logo-container-unit">
-                <div>
+            <div class = "logo-container-border">
+                <div  class="logo-container-unit">
                     <img src="../../../assets/images/icon/handmade.png" alt="main">
-                    <h3>Fait Main</h3>
+                    <h4>Fait Main</h4>
                     <p>Fait par nos petites mains</p>
                 </div>
             </div>
 
-            <div class="logo-container-unit">
-                <div>
+            <div class = "logo-container-border">
+                <div  class="logo-container-unit">
                     <img src="../../../assets/images/icon/vegan.png" alt="vegan">
-                    <h3>Vegan</h3>
+                    <h4>Vegan</h4>
                     <p>Sans prodits animal et non testé sur les animaux </p>
                 </div>
             </div>
 
+            <div class = "logo-container-border">
+                <div class="logo-container-unit">
+                    <img src="../../../assets/images/icon/bottleinterdit.png" alt="plastique">
+                    <h4>Sans plastique</h4>
+                    <p> Aucun plastiques </p>
+                </div>
+            </div>
+
+            <div class = "logo-container-border">
+                <div class="logo-container-unit">
+                    <img src="../../../assets/images/icon/3perso.png" alt="famille">
+                    <h4>Petite entreprise</h4>
+                    <p>Fabrique familliale</p>
+                </div>
+            </div>
 
         </div>
 
+    </section>
+
+    <section class="produits">
+        <h1>Découvrez nos produits !</h1>
+
+        <!--  <app-product-list> </app-product-list> -->
+
+       <div class="produits-container">
+            <!--loop over the collection of products -->
+            <div *ngFor="let tempProduct of products | slice:0:5; let i=index">
+
+                <div class="product-box">
+                    <a routerLink="/products/{{tempProduct.id}}"> 
+                        <img src="{{ tempProduct.imageUrl }}" class="product-box-img">
+                    </a>
+
+                    <a routerLink="/products/{{tempProduct.id}}"> 
+                        <h3>{{ tempProduct.name }}</h3>
+                    </a>
+                    
+                </div>
+
+            </div>
+
+           <!-- produit not found : display message -->
+            <div *ngIf="products?.length ==0" role="alert">
+                No products found.
+            </div>
+
+        </div> 
 
     </section>
 
