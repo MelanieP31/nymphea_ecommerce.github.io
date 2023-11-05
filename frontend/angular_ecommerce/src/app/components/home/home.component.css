@@ -2,13 +2,11 @@
     width: 100%;
 }
 
-
+/* Banniere de page d'accueil */
 .header{
     background-image: url(../../../assets/images/banner.png);
     background-size: cover;
 }
-
-
 .header p{
     font-family: 'Qwitcher Grypen', cursive;
     font-size: 120px;
@@ -16,14 +14,11 @@
     padding-left: 100px;
     padding-bottom: 50px;
     padding-top: 95px;
-
     transform:rotate(-4.5deg);
 }
-
 .header-text{
     padding-left: 100px;
 }
-
 .header-text button{
     margin-top: 80px;
     margin-bottom: 90px;
@@ -31,18 +26,17 @@
     font-weight: 900;
 }
 
+/* Section logo mise en avant */
 .logo{
     display: flex;
     align-items: center;
     height: 140px;
 }
-
 .logo-container{
     display: flex;
     align-items: center;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.7);
-    width: 100%;
-    
+    width: 100%;  
 }
 .logo-container-border{
     border-radius: 50%;
@@ -50,17 +44,13 @@
     padding : 5px;
     margin: auto;
     margin-bottom : 5px;
-    background-color: #f5f5f5; 
-    
-
+    background-color: #f5f5f5;  
 }
 .logo-container-unit{
     width : 132px;
     height: 120px;
-    text-align:center;
-      
+    text-align:center;   
 }
-
 .logo-container-unit img{
     height: 50px;
     width :auto;
@@ -68,23 +58,34 @@
 .logo-container-unit p {
     font-size: 12px;
     margin-top: 5px;
-    margin-bottom: 5px;
-    
+    margin-bottom: 5px;  
 }
 
+/* Section mise en avant de produits */
 .produits{
     height : 500px;
-    margin-right : 100px;
-    margin-left: 100px;
+    margin: 100px;
+}
+h1{
+    margin-top:40px;
+    margin-bottom: 30px;
+    color:#5B6A5E;
 }
 .produits-container{
     display:flex;
     align-items: center;
+    
+}
+.product-box{
+    border: solid;
+    margin: 10px;
 }
 .product-box a{
     color: black;
     text-decoration: none;
+    justify-content: center;
 }
+
 .product-box-img{
     height:200px;
     width: auto;
