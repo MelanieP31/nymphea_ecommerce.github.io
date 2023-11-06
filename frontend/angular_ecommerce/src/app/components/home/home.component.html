@@ -75,37 +75,40 @@
     <section class="produits">
         <h1>Découvrez nos produits !</h1>
 
-        <!--  <app-product-list> </app-product-list> -->
-
-       <div class="produits-container">
-            <!--loop over the collection of products -->
-            <div *ngFor="let tempProduct of products | slice:0:5; let i=index">
-
-                <div class="product-box">
-                    <a routerLink="/products/{{tempProduct.id}}"> 
-                        <img src="{{ tempProduct.imageUrl }}" class="product-box-img">
-                    </a>
-
-                    <a routerLink="/products/{{tempProduct.id}}"> 
-                        <h3>{{ tempProduct.name }}</h3>
-                    </a>
-                    
+       <div >
+            <div class="produits-container">
+                <div *ngFor="let tempProduct of products | slice:0:3; let i=index">
+                    <div class="product-box">
+                        <a routerLink="/products/{{tempProduct.id}}"> 
+                            <img src="{{ tempProduct.imageUrl }}" class="product-box-img">
+                        </a>   
+                        <a routerLink="/products/{{tempProduct.id}}"> 
+                            <h3>{{ tempProduct.name }}</h3>
+                        </a>                     
+                    </div>   
                 </div>
-
             </div>
-
-           <!-- produit not found : display message -->
-            <div *ngIf="products?.length ==0" role="alert">
-                No products found.
+            <div class="produits-container">
+                <div *ngFor="let tempProduct of products | slice:3:6; let i=index">
+                    <div class="product-box">
+                        <a routerLink="/products/{{tempProduct.id}}"> 
+                            <img src="{{ tempProduct.imageUrl }}" class="product-box-img">
+                        </a>   
+                        <a routerLink="/products/{{tempProduct.id}}"> 
+                            <h3>{{ tempProduct.name }}</h3>
+                        </a>                     
+                    </div>   
+                </div>
             </div>
-
         </div> 
 
+        <!-- produit not found : display message -->
+        <div *ngIf="products?.length ==0" role="alert">
+            No products found.
+        </div>
+
     </section>
 
-    <section class="nouveau">
-        <h1> Jetez un oeil à notre dernier produits </h1>
-    </section>
 
 
 </body>
