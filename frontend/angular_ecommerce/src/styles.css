@@ -22,17 +22,25 @@
 h1{
     font-family: var(--josephin-font);
     font-weight: 900;
-    font-size:40px;
+    font-size:44px;
+    margin-bottom: 5px;
 }
 
 h2{
-    font-size:32px
+    font-family: var(--raleway);
+    font-size:22px;
+    font-weight:400;
 }
 
 h3{
     font-family: var(--josephin-font);
-    font-size:24px;
+    font-size:30px;
     font-weight: 500;
+}
+h4{
+    font-family: var(--raleway);
+    font-size: 16px;
+    font-weight: 800;
 }
 
 p{
@@ -42,15 +50,20 @@ p{
 
 
 a{
-    display:inline-block
+    display:inline-block;
+    cursor: pointer;
 }
 
 button{
-    border:1px solid black;
-    background:0 0;
+    border:none;
+    background:var(--light-pink);
     padding: 5px 20px;
     font-family: var(--josephin-font);
-    font-weight: 400;
-    font-size: 16px;
+    font-weight: 900;
+    font-size: 20px;
     border-radius: 10px;
+    box-shadow: 3px 3px 3px rgba(0,0,0,0.7);
+}
+button:hover{
+    background-color: var(--main-pink);
 }

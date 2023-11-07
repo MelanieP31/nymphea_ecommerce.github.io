@@ -1,5 +1,16 @@
 .main-page{
     width: 100%;
+    background-color: white;
+}
+.main-page h1{
+    margin-top:20px;
+    margin-bottom: 30px;
+    color:#717e74;
+    font-size: 32px;
+    text-align: center;
+    padding: 10px;
+    border-top: 1px solid #717e74;
+    border-bottom: 1px solid #717e74;   
 }
 
 /* Banniere de page d'accueil */
@@ -9,21 +20,26 @@
 }
 .header p{
     font-family: 'Qwitcher Grypen', cursive;
-    font-size: 120px;
+    font-size: 150px;
     color:rgba(122,122,122,0.5);
     padding-left: 100px;
     padding-bottom: 50px;
-    padding-top: 95px;
+    padding-top: 85px;
     transform:rotate(-4.5deg);
 }
 .header-text{
     padding-left: 100px;
 }
+.header-text h1{
+    color: rgba(0, 0, 0, 0.7);
+    text-align: left;
+    border: none;
+    margin-bottom: 10px;
+    padding: 0;
+}
 .header-text button{
-    margin-top: 80px;
+    margin-top: 60px;
     margin-bottom: 90px;
-    background-color: white;
-    font-weight: 900;
 }
 
 /* Section logo mise en avant */
@@ -64,15 +80,8 @@
 /* Section mise en avant de produits */
 .produits{
     height : auto;
-    margin: 100px;
-    background-color: #f5f5f5;
-    border-radius: 50px;
+    margin: 70px;
     padding: 10px;
-}
-.produits h1{
-    margin-top:40px;
-    margin-bottom: 30px;
-    color:#5B6A5E;
 }
 .produits-container{
     display:flex;
@@ -80,19 +89,116 @@
     align-items: center;    
 }
 .product-box{
-    border: solid;
     margin:10px;
     height:300px;
     width: 300px;
     margin-left :100px;
+    display: table;
+    text-align: center;
+
 }
 .product-box a{
     color: black;
     text-decoration: none;
-    justify-content: center;
+}
+.product-box h3{
+    font-size: 20px;
+    font-weight: 600;
+    display: table-cell;
+    vertical-align: middle;
+}
+.product-box-img{
+    height:250px;
+    width: 300px;
+    border-radius: 20px 20px 0 0;
+}
+.produits-footer{
+    text-align: center;
+}
+.produits-footer p{
+    margin :30px;
 }
 
-.product-box-img{
-    height:200px;
-    width: auto;
+/*Section dernier ajout*/
+.dernier-ajout{
+    height : auto;
+    margin: 70px;
+    padding: 10px;
+}
+.dernier-ajout-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.dernier-ajout img{
+    height: 300px;
+    width: 300px;
+    border-radius: 50%;
+}
+.dernier-ajout h3{
+    text-align: center;
+    margin-top: 10px;
+}
+.dernier-ajout p{
+    text-align: center;
+    margin-top: 20px;
+    width: 400px;
+}
+
+/*Section Blog*/
+.blog{
+    height : auto;
+    margin: 70px;
+    padding: 10px;  
+}
+.blog-container{
+    display: flex;
+    justify-content: center;
+}
+.blog-container img{
+    width :500px;
+}
+.blog-container-text{
+    text-align: center;
+    width :500px;
+}
+.blog-container-text h2{
+    margin:40px;
+    font-weight: 600;
+    color :#717e74;
+}
+.blog-container-text p{
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+.blog-container-text h4{
+    padding:5px;
+}
+.blog-container-text button{
+    margin-top : 40px;
+}
+
+/*Section newsletter*/
+.newsletter{
+    height : auto;
+    margin: 70px;
+    padding: 10px;
+}
+.newsletter-form-container h3{
+    text-align: center;
+    width:900px;
+    align-items: center;
+    margin: auto;
+    margin-bottom: 50px;
+}
+.newsletter-form{
+    align-content: center;
+    margin-bottom: 30px;
+}
+input{
+    border : 1px 0 0 0;
+}
+.newsletter-icon-container{
+    display:flex;
+    flex-direction: row;
 }

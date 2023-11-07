@@ -12,18 +12,19 @@
             </div>
 
             <div class="header-text">
-                <h3> Avec nos savons et autres cosmétiques naturels </h3>
+                <h2> Avec nos savons et autres cosmétiques naturels </h2>
             </div>
 
             <div class="header-text">
-                <button>Nos produits</button>
+                <a routerLink="/products">
+                    <button> Nos produits </button>
+                </a>
             </div>
 
         </div>
 
 
     </section>
-
     
     <section class="logo">
 
@@ -83,7 +84,7 @@
                             <img src="{{ tempProduct.imageUrl }}" class="product-box-img">
                         </a>   
                         <a routerLink="/products/{{tempProduct.id}}"> 
-                            <h3>{{ tempProduct.name }}</h3>
+                            <h3>"{{ tempProduct.name }}"</h3>
                         </a>                     
                     </div>   
                 </div>
@@ -95,7 +96,7 @@
                             <img src="{{ tempProduct.imageUrl }}" class="product-box-img">
                         </a>   
                         <a routerLink="/products/{{tempProduct.id}}"> 
-                            <h3>{{ tempProduct.name }}</h3>
+                            <h3>"{{ tempProduct.name }}"</h3>
                         </a>                     
                     </div>   
                 </div>
@@ -106,6 +107,89 @@
         <div *ngIf="products?.length ==0" role="alert">
             No products found.
         </div>
+
+        <div class="produits-footer">
+            <p> Et découvrez encore plus de nos produits !!! </p>
+            <a routerLink="/products">
+                <button> Tout nos produits </button>
+            </a>
+            
+        </div>
+
+    </section>
+
+    <section class="dernier-ajout">
+        <h1> Notre dernier ajout </h1>
+
+        <div class="dernier-ajout-container">
+            <img src="../../../assets/images/products/nouveau/placeholder6.png" alt="">
+
+            <h3>"Bonne Mine"</h3>
+            <p>Spéciale été : orange, citron et carotte 
+                Pour plein de vitamine et un teint lumineux !
+            </p>
+
+        </div>
+
+
+
+    </section>
+
+    <section class="blog">
+        <h1>En apprenez plus sur nous et nos produits !</h1>
+
+        <div class="blog-container">
+            <div>
+                <img src="../../../assets/images/illustration.png" alt="visage">
+            </div>
+
+            <div class="blog-container-text">
+                <h2> Vos soins, nos produits </h2>
+
+                <p>Vous voulez savoir exactement ce que ous mettez sur votre peaux ou dans vos cheveux ? Nos ingérdients ne sont pas un secret! 
+                    Apprenez à nous connaitre, suivez notre histoire. 
+                    Renseignez-vous sur les bienfaits des savons solide et des crèmes avec des ingrédients bio sélectionnez avec soin.
+                </p>
+        
+                <h4> Qui sommes nous ?</h4>
+                <h4> Quels ingédients utilises-t-on ?</h4>
+                <h4> Connaitre nos recettes ?</h4>
+
+                <button>Notre Blog</button>
+            </div>
+
+        </div>
+
+        
+
+    </section>
+
+    <section class="newsletter">
+        <div class="newsletter-form-container">
+            <h3>Pour être au courant de nos nouveaux produits et recevoir des offres exclusives sur nos nouvelles recettes !</h3>
+
+            <div class="newsletter-form">
+                <label for="email" class="newsletter-form">E-mail</label>
+                <input type="email" id="email" size="30" required>
+                <input type="submit" value="S'inscrire">
+            </div>
+
+
+
+        </div>
+        <div class="newsletter-icon-container">
+            <div class="newsletter-icon">
+                <p>Livraison offerte à partir de 40(e)</p>
+            </div>
+            <div class="newsletter-icon">
+                <p>Paiement sécurisé</p>
+            </div>
+            <div class="newsletter-icon">
+                <p>Une question ? Contactez-nous</p>
+            </div>
+        </div>
+
+
 
     </section>
 
