@@ -1,30 +1,15 @@
-<aside class="menu-sidebar d-none d-lg-block">
-    <div class="logo">
-      <a routerLink="/products">
-        <img src="assets/images/logo.png" alt="luv2shop" class="img-responsive">
-      </a>
+<div>
+  <div class="dropdown">
+    <button class="mainbtn">CATEGORIES <i class="fa fa-angle-down" aria-hidden="true"></i></button>
+    <div class="dropdown-child">
+      <ul>
+        <li *ngFor="let tempProductCategory of productCategories">
+          <a routerLink="/category/{{ tempProductCategory.id }}/{{ tempProductCategory.categoryName }}"
+            routerLinkActive="active-link">
+            {{ tempProductCategory.categoryName }}
+          </a>
+        </li>
+      </ul>
     </div>
-
-    <div class="menu-sidebar-content js-scrollbar1">
-        <nav class="navbar-sidebar">
-            <ul class="list-unstyled navbar-list">
-      
-                <li *ngFor="let tempProductCategory of productCategories">
-      
-                  <a routerLink="/category/{{ tempProductCategory.id }}/{{ tempProductCategory.categoryName }}" routerLinkActive="active-link">
-
-                        {{ tempProductCategory.categoryName }}
-                    </a>
-                    
-                </li>
-      
-            </ul>
-        </nav>
-      </div>
-
-    
-
-</aside>
-
-
-
+  </div>
+</div>

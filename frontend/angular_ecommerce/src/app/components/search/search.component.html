@@ -1,9 +1,9 @@
-<div>
+<div class="recherche">
     <input #myInput type="text" 
         placeholder="Search for products..." 
         (keyup.enter)="doSearch(myInput.value)"
     />
 
-    <button (click)="doSearch(myInput.value)">Search</button>
+    <button (click)="doSearch(myInput.value)"><i class="fa fa-search" aria-hidden="true"></i></button>
 </div>
 

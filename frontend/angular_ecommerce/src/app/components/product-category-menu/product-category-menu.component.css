@@ -1,0 +1,29 @@
+
+.mainbtn{
+    margin:10px;
+    box-shadow: none;
+    padding: 10px 30px 10px 30px;
+}
+.mainbtn i{
+    vertical-align: text-top;
+}
+.dropdown{
+    position: relative;
+    display: inline-block;
+}
+.dropdown-child{
+    display: none;
+    min-width: 200px;
+}
+.dropdown-child li:hover{
+    background-color: var(--light-pink);
+}
+.dropdown-child a{
+    color:black;
+    padding: 20px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown:hover .dropdown-child{
+    display: block;
+}
