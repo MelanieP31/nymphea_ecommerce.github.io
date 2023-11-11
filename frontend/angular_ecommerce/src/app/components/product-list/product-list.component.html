@@ -1,14 +1,15 @@
-
 <div>
 
     <div class="introduction">
         <h3>Nos produits</h3>
-        <p>Nos savons, shampoings, exfoliants et autres cosmétiques sont tous fabriqués dans notre laboratoire familiale. 
-            Nous apportons une grande importance à la qualité des ingrédients que nous utilisons et proposons des recettes 
+        <p>Nos savons, shampoings, exfoliants et autres cosmétiques sont tous fabriqués dans notre laboratoire
+            familiale.
+            Nous apportons une grande importance à la qualité des ingrédients que nous utilisons et proposons des
+            recettes
             blablabla
         </p>
     </div>
-   
+
     <div class="categorie">
         <app-product-category-menu></app-product-category-menu>
         <app-search> </app-search>
@@ -19,60 +20,54 @@
 
 <!--Main content : La liste des produits-->
 <div class="main-content">
-    <div class="section-content section-content-p30">
-        <h4>Category: {{ currentCategoryName }}</h4>
+    <div class="section-content">
+
+        <h4>Categorie: {{ currentCategoryName }}</h4>
         <hr>
-        <div class="container-fluid">
-            <div class="row">
-                <!-- loop over the collection of products -->
-                <div *ngFor="let tempProduct of products" class="col-md-3">
 
-                    <div class="product-box">
-                        <a routerLink="/products/{{tempProduct.id}}"> 
-                            <img src="{{ tempProduct.imageUrl }}" class="img-responsive">
-                        </a>
+        <div class="container">
 
-                        <a routerLink="/products/{{tempProduct.id}}"> 
-                            <h1>{{ tempProduct.name }}</h1>
-                        </a>
-                        
-                        <div class="price">{{ tempProduct.unitPrice | currency:'USD' }}</div>
-                        <button (click)="addToCart(tempProduct)" class="primary-btn">Add to cart</button>
-                    </div>
+            <div *ngFor="let tempProduct of products" class="product-container">
+                <div class="product-box">
+                    <a routerLink="/products/{{tempProduct.id}}">
+                        <img src="{{ tempProduct.imageUrl }}" class="img-responsive">
+                    </a>
 
-                </div>
+                    <a routerLink="/products/{{tempProduct.id}}">
+                        <h3>{{ tempProduct.name }}</h3>
+                    </a>
 
-                <!--produit not found : display message-->
-                <div *ngIf="products?.length ==0" role="alert">
-                    No products found.
+                    <div class="price">{{ tempProduct.unitPrice | currency:'USD' }}</div>
+                    <button (click)="addToCart(tempProduct)" class="primary-btn">Add to cart</button>
                 </div>
 
             </div>
-            <!--pagination-->
-            <div>
-                <div>
-                    <ngb-pagination [(page)]="thePageNumber" 
-                                [pageSize]="thePageSize" 
-                                [collectionSize]="theTotalElements"
-                                [maxSize]="5"
-                                [boundaryLinks]="true"
-                                (pageChange)="listProducts()"
-                                class="pagination">
-                    </ngb-pagination> 
 
-                    <span> Page size </span>
-
-                    <select #myPageSelect (change)="updatePageSize(myPageSelect.value)">
-                        <option selected="true">5</option>
-                        <option>10</option>
-                        <option>20</option>
-                        <option>50</option>
-                    </select>
-                    
-                </div>
-
+            <!--produit not found : display message-->
+            <div *ngIf="products?.length ==0" role="alert">
+                No products found.
             </div>
+
         </div>
+        <!--pagination-->
+        <div>
+            <div>
+                <ngb-pagination [(page)]="thePageNumber" [pageSize]="thePageSize" [collectionSize]="theTotalElements"
+                    [maxSize]="5" [boundaryLinks]="true" (pageChange)="listProducts()" class="pagination">
+                </ngb-pagination>
+
+                <span> Page size </span>
+
+                <select #myPageSelect (change)="updatePageSize(myPageSelect.value)">
+                    <option selected="true">5</option>
+                    <option>10</option>
+                    <option>20</option>
+                    <option>50</option>
+                </select>
+
+            </div>
+
+        </div>
+
     </div>
 </div>
-
