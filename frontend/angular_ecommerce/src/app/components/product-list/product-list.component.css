@@ -21,7 +21,7 @@
     gap: 50px;
     vertical-align: baseline;
 }
-.section-content h4{
+.main-content h4{
     margin: 0px 0px 20px 100px;
 }
 hr{
@@ -32,21 +32,21 @@ hr{
 
 }
 .container{
-
     display: flex;
     flex-wrap: wrap;
-}
-.container > *{
-    flex:1 1 160px;
+    gap:50px;
 }
 
 .product-box{
     display: flex;
     flex-direction: column;
+    margin-left:50px;
 }
 .product-box img{
     width: 300px;
     height: 300px;
+    margin-bottom: 10px;
+
 }
 .product-box a{
     text-decoration: none;
@@ -55,6 +55,10 @@ hr{
 .product-box button{
     width :300px;
     margin-bottom: 30px;
+    margin : 10px 0px 50px 0px;
+}
+.product-box h3{
+    text-align:center;
 }
 
 

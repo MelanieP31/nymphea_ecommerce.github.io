@@ -36,6 +36,12 @@ public class Product {
 	@Column(name="name")
 	private String name;
 	
+	@Column(name="subname")
+	private String subname;
+	
+	@Column(name="introduction")
+	private String introduction;
+	
 	@Column(name="description")
 	private String description;
 	
@@ -45,11 +51,20 @@ public class Product {
 	@Column(name="image_url")
 	private String imageUrl;
 	
+	@Column(name="type_peau")
+	private String typePeau;
+	
+	@Column(name="ingredients")
+	private String ingredients;
+	
 	@Column(name="active")
 	private boolean active;
 	
 	@Column(name="units_in_stock")
 	private int unitsInStock;
+	
+	@Column(name="poids")
+	private int poids;
 	
 	@Column(name="date_created")
 	@CreationTimestamp

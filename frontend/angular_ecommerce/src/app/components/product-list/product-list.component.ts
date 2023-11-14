@@ -23,7 +23,7 @@ export class ProductListComponent implements OnInit {
   
   //Afficher la pagination 
   thePageNumber : number = 1;
-  thePageSize : number = 5;
+  thePageSize : number = 12;
   theTotalElements : number = 0; 
 
   //Pagination pour la recherche par mot clé

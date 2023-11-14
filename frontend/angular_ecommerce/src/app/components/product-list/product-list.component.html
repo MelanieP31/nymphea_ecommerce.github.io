@@ -20,10 +20,13 @@
 
 <!--Main content : La liste des produits-->
 <div class="main-content">
+    <h4>Categorie: {{ currentCategoryName }}</h4>
+    <hr>
+
+
     <div class="section-content">
 
-        <h4>Categorie: {{ currentCategoryName }}</h4>
-        <hr>
+
 
         <div class="container">
 
@@ -38,25 +41,25 @@
                     </a>
 
                     <div class="price">{{ tempProduct.unitPrice | currency:'USD' }}</div>
-                    <button (click)="addToCart(tempProduct)" class="primary-btn">Add to cart</button>
+                    <button (click)="addToCart(tempProduct)" class="primary-btn">Ajouter au panier</button>
                 </div>
 
             </div>
 
             <!--produit not found : display message-->
             <div *ngIf="products?.length ==0" role="alert">
-                No products found.
+                Pas de produits trouvés.
             </div>
 
         </div>
         <!--pagination-->
-        <div>
+       <!-- <div>
             <div>
                 <ngb-pagination [(page)]="thePageNumber" [pageSize]="thePageSize" [collectionSize]="theTotalElements"
                     [maxSize]="5" [boundaryLinks]="true" (pageChange)="listProducts()" class="pagination">
                 </ngb-pagination>
 
-                <span> Page size </span>
+                <span> Nb d'articles </span>
 
                 <select #myPageSelect (change)="updatePageSize(myPageSelect.value)">
                     <option selected="true">5</option>
@@ -67,7 +70,7 @@
 
             </div>
 
-        </div>
+        </div>-->
 
     </div>
 </div>

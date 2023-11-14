@@ -1,18 +1,63 @@
-<div class = "details-section">
-    <div class="container-fluid">
-        <img src="{{product.imageUrl}}" class="detail-img">
+<div class="details-section">
+    <img src="{{product.imageUrl}}">
+
+    <div class="details-container">
+
+        <p class="type-peau">{{product.typePeau}}</p>
 
         <h3>{{product.name}}</h3>
+        <h4>{{product.subname}}</h4>
+
+        <p class="avis">
+            <i class="fa-regular fa-star" aria-hidden="true"></i>
+            <i class="fa-regular fa-star" aria-hidden="true"></i>
+            <i class="fa-regular fa-star" aria-hidden="true"></i>
+            <i class="fa-regular fa-star" aria-hidden="true"></i>
+            <i class="fa-regular fa-star" aria-hidden="true"></i>
+            (avis)
+        </p>
+
+        <p class="introduction">{{product.introduction}}</p>
+        
+        <div class="poids">Produit de {{product.poids}}gr</div>
         <div class="price"> {{product.unitPrice| currency :'USD'}}</div>
-        <button (click)="addToCart()" class="primary-btn">Add to cart</button>
 
-        <hr>
+        <button (click)="addToCart()" class="btn">Ajouter au panier</button>
 
-        <h4>Descriptions</h4>
-        <p> {{product.description}}</p>
-
-        <a routerLink="/products">Back to Product List</a>
     </div>
+
 </div>
 
+<div class="logo-container">
+    <div class = "logo-container-border">
+        <div class="logo-container-unit">
+            <img src="../../../assets/images/icon/france.png">
+            <h4>Fabriqué en France </h4>
+        </div>               
+    </div>
+    <div class = "logo-container-border">
+        <div  class="logo-container-unit">
+            <img src="../../../assets/images/icon/handmade.png" alt="main">
+            <h4>Fait Main</h4>
+        </div>
+    </div>
+    <div class = "logo-container-border">
+        <div class="logo-container-unit">
+            <img src="../../../assets/images/icon/bottleinterdit.png" alt="plastique">
+            <h4>Sans plastique</h4>
+        </div>
+    </div>
+
+
+</div>
+
+<div>
+    <h4>Descriptions</h4>
+    <p> {{product.description}}</p>
+</div>
+
+<div>
+    <a routerLink="/products">Back to Product List</a>
+</div>
+    
 
