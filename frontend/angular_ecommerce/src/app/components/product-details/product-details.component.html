@@ -3,7 +3,7 @@
 
     <div class="details-container">
 
-        <p class="type-peau">{{product.typePeau}}</p>
+        <div><h4>{{product.typePeau}}</h4></div>
 
         <h3>{{product.name}}</h3>
         <h4>{{product.subname}}</h4>
@@ -19,8 +19,8 @@
 
         <p class="introduction">{{product.introduction}}</p>
         
-        <div class="poids">Produit de {{product.poids}}gr</div>
-        <div class="price"> {{product.unitPrice| currency :'USD'}}</div>
+        <h4>Produit de {{product.poids}}gr</h4>
+        <div class="price"> <p>{{product.unitPrice| currency :'USD'}}</p></div>
 
         <button (click)="addToCart()" class="btn">Ajouter au panier</button>
 
@@ -51,12 +51,26 @@
 
 </div>
 
-<div>
-    <h4>Descriptions</h4>
-    <p> {{product.description}}</p>
+<div class="box-description">
+    <div class="button">
+        <button (click)="toggleTag1()" >Description</button>
+        <button (click)="toggleTag2()" >Avis</button>
+        <button (click)="toggleTag3()">Ingredients</button>
+
+    </div>
+    <div> 
+        <p *ngIf="showMe1">{{product.description}}</p>         
+        <p *ngIf="showMe2">blabma</p>
+        <p *ngIf="showMe3"> {{product.ingredients}}></p>
+    </div>
 </div>
 
-<div>
+<div class="produit-similaire">
+    blablbla
+
+</div>
+
+<div class="retour">
     <a routerLink="/products">Back to Product List</a>
 </div>
     

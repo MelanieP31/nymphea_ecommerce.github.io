@@ -13,6 +13,10 @@ import { CartService } from 'src/app/services/cart.service';
 export class ProductDetailsComponent implements OnInit {
 
   product!: Product;
+  showMe1:boolean = true;
+  showMe2:boolean = false;
+  showMe3: boolean = false;
+  id! : string;
 
   constructor(private productService : ProductService,
               private route : ActivatedRoute,
@@ -44,6 +48,23 @@ export class ProductDetailsComponent implements OnInit {
     const theCartItem = new CartItem(this.product);
 
     this.cartService.addToCart(theCartItem);
+  }
+
+  toggleTag1(){
+    this.showMe1=!this.showMe1;
+    this.showMe2=false;
+    this.showMe3=false;
+  }
+
+  toggleTag2(){
+    this.showMe1=false;
+    this.showMe2=!this.showMe2;
+    this.showMe3=false;
+  }
+  toggleTag3(){
+    this.showMe1=false;
+    this.showMe2=false;
+    this.showMe3=!this.showMe3;
   }
 
 }

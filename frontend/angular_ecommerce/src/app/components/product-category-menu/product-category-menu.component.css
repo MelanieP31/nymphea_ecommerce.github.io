@@ -15,6 +15,9 @@
     display: none;
     min-width: 200px;
 }
+ul{
+    list-style-type: none;
+}
 .dropdown-child li:hover{
     background-color: var(--light-pink);
 }

@@ -1,74 +1,69 @@
 <div class="main-content">
-    <div class="section-content">
-        <div class="container">
 
-            <div *ngIf="cartItems.length >0">
-                <table class="table">
-                    <tr>
-                        <th width="20%"> Product Image</th>
-                        <th width="50%"> Product Detail</th>
-                        <th width="30%"></th>
-                    </tr>
+    <div *ngIf="cartItems.length >0" class="section-article">
+        <table class="table">
+            <tr>
+                <th width="20%"> Product Image</th>
+                <th width="50%"> Product Detail</th>
+                <th width="30%"></th>
+            </tr>
 
-                    <tr *ngFor="let tempCartItem of cartItems">
-                        <td>
-                            <img src="{{ tempCartItem.imageUrl}}">
-                        </td>
-                        <td>
-                            <p>{{tempCartItem.name}}</p>
-                            <p>{{tempCartItem.unitPrice}}</p>
-                        </td>
-                        <td>
-                            <div>
-                                <label>Quantity : </label>
-                                <div>
-                                    <button (click)="incrementQuantity(tempCartItem)">
-                                        <i class="fas fa-plus"></i>
-                                    </button>
-                                </div>
+            <tr *ngFor="let tempCartItem of cartItems">
+                <td>
+                    <img src="{{ tempCartItem.imageUrl}}">
+                </td>
+                <td>
+                    <h4>{{tempCartItem.name}}</h4>
+                    <p>{{tempCartItem.subname}}</p>
+                    <p class="price">{{tempCartItem.unitPrice}}</p>
+                </td>
+                <td>
+                    <div>
+                        <label>Quantity : </label>
+                        <div>
+                            <button (click)="incrementQuantity(tempCartItem)">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
 
-                                <div>
-                                    {{tempCartItem.quantity}}
-                                </div>
+                        <div>
+                            {{tempCartItem.quantity}}
+                        </div>
 
-                                <div>
-                                    <button (click)="decrementQuantity(tempCartItem)">
-                                        <i class="fas fa-minus"></i>
-                                    </button>
-                                </div>
+                        <div>
+                            <button (click)="decrementQuantity(tempCartItem)">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
 
-                                <div>
-                                    <button (click)="remove(tempCartItem)">
-                                        <p>Remove</p>
-                                    </button>
-                                </div>
-                               
-                            </div>
-                            <p> Subtotal: {{tempCartItem.quantity*tempCartItem.unitPrice | currency : 'USD'}} </p>
-                        </td>
-                    </tr>
+                        <div>
+                            <button (click)="remove(tempCartItem)">
+                                <p>Remove</p>
+                            </button>
+                        </div>
 
-                    <tr>
-                        <td> </td>
-                        <td> </td>
-                        <td style="font-weight: bold">
-                            <p>TotalQuantity : {{ totalQuantity}}</p>
-                            <p>Total Price : {{totalPrice | currency : 'USD'}}</p>
-                            <a routerLink="/checkout" class="btn">Checkout</a>
-                        </td>
-                    </tr>
+                    </div>
+                    <p> Subtotal: {{tempCartItem.quantity*tempCartItem.unitPrice | currency : 'USD'}} </p>
+                </td>
+            </tr>
 
-                </table>
-            </div>
+            <tr>
+                <td> </td>
+                <td> </td>
+                <td style="font-weight: bold">
+                    <p>TotalQuantity : {{ totalQuantity}}</p>
+                    <p>Total Price : {{totalPrice | currency : 'USD'}}</p>
+                    <a routerLink="/checkout" class="btn">Checkout</a>
+                </td>
+            </tr>
 
-            <div *ngIf="cartItems.length == 0">
-                <p>Votre panier est vide !! </p>
-            </div>
-
-
-
-        </div>
-
+        </table>
     </div>
+
+    <div *ngIf="cartItems.length == 0" class="section-vide">
+        <p>Votre panier est vide !! </p>
+    </div>
+
+
 
 </div>
