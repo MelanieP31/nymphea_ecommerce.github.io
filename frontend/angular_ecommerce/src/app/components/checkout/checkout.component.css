@@ -1,0 +1,23 @@
+.main-content{
+    text-align: center;
+    margin: auto;
+}
+.form-area{
+    margin:50px 100px 50px 100px;
+    background-color: #fbfbfb;
+    border-radius: 50px;
+}
+h3{
+    margin-bottom:5px;
+    font-size: 28px;
+}
+label{
+    font-family: var(--josephin-font);
+}
+.review p{
+    margin-top:5px;
+
+}
+.btn button{
+    margin:10px auto 10px auto;
+}

@@ -3,8 +3,8 @@
     <div *ngIf="cartItems.length >0" class="section-article">
         <table class="table">
             <tr>
-                <th width="20%"> Product Image</th>
-                <th width="50%"> Product Detail</th>
+                <th width="40%"></th>
+                <th width="30%"></th>
                 <th width="30%"></th>
             </tr>
 
@@ -18,8 +18,7 @@
                     <p class="price">{{tempCartItem.unitPrice}}</p>
                 </td>
                 <td>
-                    <div>
-                        <label>Quantity : </label>
+                    <div class="quantity">
                         <div>
                             <button (click)="incrementQuantity(tempCartItem)">
                                 <i class="fas fa-plus"></i>
@@ -27,7 +26,7 @@
                         </div>
 
                         <div>
-                            {{tempCartItem.quantity}}
+                            <p>{{tempCartItem.quantity}}</p>
                         </div>
 
                         <div>
@@ -36,24 +35,25 @@
                             </button>
                         </div>
 
-                        <div>
+                        <div class="quantity-suppr">
                             <button (click)="remove(tempCartItem)">
-                                <p>Remove</p>
+                                <i class="fa-solid fa-trash-can"></i>
                             </button>
                         </div>
 
                     </div>
-                    <p> Subtotal: {{tempCartItem.quantity*tempCartItem.unitPrice | currency : 'USD'}} </p>
+                    <p class="sous-total"> Sous-total: {{tempCartItem.quantity*tempCartItem.unitPrice | currency : 'USD'}} </p>
                 </td>
             </tr>
 
             <tr>
                 <td> </td>
                 <td> </td>
-                <td style="font-weight: bold">
-                    <p>TotalQuantity : {{ totalQuantity}}</p>
-                    <p>Total Price : {{totalPrice | currency : 'USD'}}</p>
-                    <a routerLink="/checkout" class="btn">Checkout</a>
+                <td class="total">
+                    <hr>
+                    <p>Quantité total : {{ totalQuantity}}</p>
+                    <p>Prix total : {{totalPrice | currency : 'USD'}}</p>
+                    <button><a routerLink="/checkout" class="btn">Checkout</a></button>
                 </td>
             </tr>
 
