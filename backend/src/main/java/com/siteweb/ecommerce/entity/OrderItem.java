@@ -14,7 +14,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name="oder_item")
+@Table(name="order_item")
 @Getter
 @Setter
 public class OrderItem {
@@ -27,7 +27,7 @@ public class OrderItem {
 	@Column(name="image_url")
 	private String imageUrl;
 	
-	@Column(name="uit_price")
+	@Column(name="unit_price")
 	private BigDecimal unitPrice;
 	
 	@Column(name="quantity")
