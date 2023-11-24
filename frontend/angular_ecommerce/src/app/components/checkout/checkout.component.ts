@@ -5,6 +5,11 @@ import { Country } from 'src/app/common/country';
 import { State } from 'src/app/common/state';
 import { SiteValidators} from 'src/app/validators/site-validators';
 import { CartService } from 'src/app/services/cart.service';
+import { CheckoutService } from 'src/app/services/checkout.service';
+import { Router } from '@angular/router';
+import { Order } from 'src/app/common/order';
+import { OrderItem } from 'src/app/common/order-item';
+import { Purchase } from 'src/app/common/purchase';
 
 @Component({
   selector: 'app-checkout',
@@ -29,7 +34,9 @@ export class CheckoutComponent implements OnInit {
   
   constructor(private formBuilder: FormBuilder,
               private creditCardService: CreditcardService,
-              private cartService: CartService) { }
+              private cartService: CartService,
+              private checkoutService : CheckoutService,
+              private router : Router) { }
 
   ngOnInit(): void {
     
@@ -173,14 +180,81 @@ export class CheckoutComponent implements OnInit {
 
     if (this.checkoutFormGroup.invalid) {
       this.checkoutFormGroup.markAllAsTouched();
+      return;
     }
 
-    console.log(this.checkoutFormGroup.get('customer').value);
-    console.log("The email address is " + this.checkoutFormGroup.get('customer').value.email);
+    //set up order
+    let order = new Order();
+    order.totalPrice = this.totalPrice;
+    order.totalQuantity = this.totalQuantity;
+
+    //get cart Items
+    const cartItems = this.cartService.cartItems;
+
+    //creer orderItems from CartItem (2facon de faire 1traditionnel)
+    //traditionelle
+    let orderItems : OrderItem[] = [];
+    for(let i=0; i<cartItems.length; i++){
+      orderItems[i]= new OrderItem(cartItems[i]);
+    }
+    //meme chose (+ courte?)
+    //let order : OrderItem[] = cartItems.map(tempCartItem => new OrderItem(tempCartItem));
+
+    //set up Purchase
+    let purchase = new Purchase();
+
+    //populate purchase - customer
+    purchase.customer = this.checkoutFormGroup.controls['customer'].value;
+
+    //populate purchase - shipping Address
+    purchase.shippingAddress = this.checkoutFormGroup.controls['shippingAddress'].value;
+    const shippingState : State = JSON.parse(JSON.stringify(purchase.shippingAddress.state));
+    const shippingCountry : Country = JSON.parse(JSON.stringify(purchase.shippingAddress.country));
+    purchase.shippingAddress.state = shippingState.name;
+    purchase.shippingAddress.country = shippingCountry.name;
+
+
+    //populate purchase - billin address
+    purchase.billingAddress = this.checkoutFormGroup.controls['billingAddress'].value;
+    const billingState : State = JSON.parse(JSON.stringify(purchase.billingAddress.state));
+    const billingCountry : Country = JSON.parse(JSON.stringify(purchase.billingAddress.country));
+    purchase.billingAddress.state = billingState.name;
+    purchase.billingAddress.country = billingCountry.name;
+
+    //populate purchase - order et OrderItems
+    purchase.order = order;
+    purchase.orderItems = orderItems;
+
+    //appeler l'API via le checkoutService
+    this.checkoutService.placeOrder(purchase).subscribe(
+      {
+         next: response => {
+          alert(`Your order has been received.\n Order trackig number : ${response.orderTrackingNumber}`);
+
+          //reset Card
+          this.resetCart();
+
+         },
+         error: err =>{
+          alert(`there was an error : ${err.message}`);
+         }
+      }
+    )
+
   
-    console.log("The shipping address country is " + this.checkoutFormGroup.get('shippingAddress').value.country.name);
-    console.log("The shipping address state is " + this.checkoutFormGroup.get('shippingAddress').value.state.name);
-  
+  }
+
+  resetCart() {
+    //reset card data
+    this.cartService.cartItems = [];
+    this.cartService.totalPrice.next(0);
+    this.cartService.totalQuantity.next(0);
+    
+    //reset form
+    this.checkoutFormGroup.reset();
+
+    //navigate ack productpage
+    this.router.navigateByUrl("/products");
   }
 
   handleMonthsAndYears() {
