@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.ArrayList;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
@@ -23,7 +22,6 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
 
     private EntityManager entityManager;
 
-    @Autowired
     public MyDataRestConfig(EntityManager theEntityManager) {
         entityManager = theEntityManager;
     }
@@ -43,7 +41,7 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
         exposeIds(config);
     }
 
-    private void disableHttpMethods(Class theClass, RepositoryRestConfiguration config, HttpMethod[] theUnsupportedActions) {
+    private void disableHttpMethods(Class<?> theClass, RepositoryRestConfiguration config, HttpMethod[] theUnsupportedActions) {
         config.getExposureConfiguration()
                 .forDomainType(theClass)
                 .withItemExposure((metdata, httpMethods) -> httpMethods.disable(theUnsupportedActions))
@@ -59,15 +57,17 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
         Set<EntityType<?>> entities = entityManager.getMetamodel().getEntities();
 
         // - create an array of the entity types
-        List<Class> entityClasses = new ArrayList<>();
+        @SuppressWarnings("rawtypes")
+		List<Class> entityClasses = new ArrayList<>();
 
         // - get the entity types for the entities
-        for (EntityType tempEntityType : entities) {
+        for (@SuppressWarnings("rawtypes") EntityType tempEntityType : entities) {
             entityClasses.add(tempEntityType.getJavaType());
         }
 
         // - expose the entity ids for the array of entity/domain types
-        Class[] domainTypes = entityClasses.toArray(new Class[0]);
+        @SuppressWarnings("rawtypes")
+		Class[] domainTypes = entityClasses.toArray(new Class[0]);
         config.exposeIdsFor(domainTypes);
     }
 }

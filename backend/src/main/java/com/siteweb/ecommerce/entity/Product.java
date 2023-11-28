@@ -45,14 +45,14 @@ public class Product {
 	@Column(name="description")
 	private String description;
 	
+	@Column(name="application_type")
+	private String applicationType;
+	
 	@Column(name="unit_price")
 	private BigDecimal unitPrice;
 	
 	@Column(name="image_url")
 	private String imageUrl;
-	
-	@Column(name="type_peau")
-	private String typePeau;
 	
 	@Column(name="ingredients")
 	private String ingredients;
@@ -62,9 +62,6 @@ public class Product {
 	
 	@Column(name="units_in_stock")
 	private int unitsInStock;
-	
-	@Column(name="poids")
-	private int poids;
 	
 	@Column(name="date_created")
 	@CreationTimestamp
