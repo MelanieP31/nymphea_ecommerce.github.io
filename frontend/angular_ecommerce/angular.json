@@ -13,6 +13,13 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "@babel/runtime-corejs3",
+              "cross-fetch",
+              "p-cancelable", "tiny-emitter", "clipboard",
+              "@sindresorhus/to-milliseconds", "parse-ms",
+              "q", "detect-node"
+            ],
             "outputPath": "dist/angular_ecommerce",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -25,7 +32,7 @@
             "styles": [
               "src/styles.css",
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
-              "node_modules/@okta/okta-signin-widget/dist/okta-sign-in.min.css"
+              "node_modules/@okta/okta-signin-widget/dist/CSS/okta-sign-in.min.css"
             ],
             "scripts": []
           },
