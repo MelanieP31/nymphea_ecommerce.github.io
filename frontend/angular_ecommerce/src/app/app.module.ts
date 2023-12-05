@@ -26,27 +26,27 @@ const oktaConfig = myAppConfig.oidc;
 const oktaAuth = new OktaAuth(oktaConfig);
 
 const routes: Routes = [
-  {path: '', component : HomeComponent},
-  {path:'home', component:HomeComponent},
-  {path: 'login/callback', component : OktaCallbackComponent},
-  {path: 'login', component : LoginComponent},
-  {path: 'products', component: ProductListComponent},
-  {path:'checkout', component : CheckoutComponent},
-  {path:'cart-details', component : CartDetailsComponent},
-  {path:'products/:id', component : ProductDetailsComponent},
-  {path:'search/:keyword', component: ProductListComponent},
-  {path: 'category/:id/:name', component: ProductListComponent},
+
+  {path: 'login/callback', component: OktaCallbackComponent},
+  {path: 'login', component: LoginComponent},
+
+  {path: 'checkout', component: CheckoutComponent},
+  {path: 'cart-details', component: CartDetailsComponent},
+  {path: 'products/:id', component: ProductDetailsComponent},
+  {path: 'search/:keyword', component: ProductListComponent},
+  {path: 'category/:id', component: ProductListComponent},
   {path: 'category', component: ProductListComponent},
+  {path: 'products', component: ProductListComponent},
+  {path:'home', component:HomeComponent},
 
+  {path: '', redirectTo: '/home', pathMatch: 'full'},
+  {path: '**', redirectTo: '/home', pathMatch: 'full'}
 
-  {path : '**', redirectTo:'home', pathMatch:'full'}
-
-  //{path: '', redirectTo: '/products', pathMatch: 'full'},
-  //{path: '**', redirectTo: '/products', pathMatch: 'full'}
 ];
 
 @NgModule({
   declarations: [
+    HomeComponent,
     AppComponent,
     ProductListComponent,
     ProductCategoryMenuComponent,
@@ -55,7 +55,6 @@ const routes: Routes = [
     CartStatusComponent,
     CartDetailsComponent,
     CheckoutComponent,
-    HomeComponent,
     LoginComponent,
     LoginStatusComponent
   ],

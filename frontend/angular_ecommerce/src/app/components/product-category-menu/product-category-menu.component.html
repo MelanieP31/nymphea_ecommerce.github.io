@@ -4,10 +4,11 @@
     <div class="dropdown-child">
       <ul>
         <li *ngFor="let tempProductCategory of productCategories">
-          <a routerLink="/category/{{ tempProductCategory.id }}/{{ tempProductCategory.categoryName }}"
-            routerLinkActive="active-link">
-            {{ tempProductCategory.categoryName }}
+
+          <a routerLink="/category/{{ tempProductCategory.id }}" routerLinkActive="active-link">
+              {{ tempProductCategory.categoryName }}
           </a>
+
         </li>
       </ul>
     </div>
