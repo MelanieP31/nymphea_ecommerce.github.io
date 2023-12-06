@@ -59,7 +59,7 @@
             <h3>Adresse de livraison</h3>
 
             <div class="row">
-                <!--
+         
                 <div>
                     <div><label>Country</label></div>
                     <select formControlName="country" (change)="getStates('shippingAddress')">
@@ -74,7 +74,7 @@
                         </div>
                     </div>
                 </div>
-                -->
+       
 
                 <div><label>Rue</label></div>
                 <input formControlName="street" type="text">
@@ -100,7 +100,7 @@
                     </div>
                 </div>
 
-                <!--
+           
                 <div>
                     <div><label>State</label></div>
                     <select formControlName="state">
@@ -115,8 +115,7 @@
                         </div>
                     </div>
                 </div>
-                -->
-
+           
 
 
                 <div><label>Code postal</label></div>
@@ -147,7 +146,7 @@
         <div formGroupName="billingAddress" class="form-area">
             <h3>Adresse de livraison</h3>
             <div class="row">
-                <!--
+               
                 <div><label>Country</label></div>
                 <select formControlName="country" (change)="getStates('billingAddress')">
                     <option *ngFor="let country of countries" [ngValue]="country">
@@ -160,7 +159,7 @@
                         Country is required
                     </div>
                 </div>
-                -->
+              
 
                 <div><label>Rue</label></div>
                 <input formControlName="street" type="text">
@@ -185,7 +184,7 @@
                     </div>
                 </div>
 
-                <!--
+             
                 <div><label>State</label></div>
                 <select formControlName="state">
                     <option *ngFor="let state of billingAddressStates" [ngValue]="state">
@@ -197,7 +196,7 @@
                         State is required
                     </div>
                 </div>
-                -->
+           
 
                 <div><label>Code postal</label></div>
                 <input formControlName="zipCode" type="text">
