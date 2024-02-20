@@ -8,11 +8,23 @@ import { BehaviorSubject, Subject } from 'rxjs';
 export class CartService {
 
   cartItems: CartItem[] = [];
+  //Reference web browser session storage
+  //storage: Storage = sessionStorage;
+  storage: Storage = localStorage;
 
   totalPrice: Subject<number> = new BehaviorSubject<number>(0);
   totalQuantity: Subject<number> = new BehaviorSubject<number>(0);
 
-  constructor() { }
+  constructor() {
+    //lire les donnees du storage - key = cartItems
+    //JSON.parse : lie la chaine et la convertie en un objet
+    let data = JSON.parse(this.storage.getItem('cartItems')!);
+    //verifier qu'il y a bien des donnes + total : ajouter les data du storage
+    if (data != null) {
+      this.cartItems = data;
+      this.computeCartTotals();
+    }
+  }
 
   //ajouter des items dans le panier
   addToCart(theCartItem: CartItem) {
@@ -77,7 +89,16 @@ export class CartService {
 
     // log cart data just for debugging purposes
     this.logCartData(totalPriceValue, totalQuantityValue);
+
+    //persistance des donne storage
+    this.persistCartItems();
   }
+
+  //ajouter methode persisteCartItems() key : cartItems ; value = objet du cartItems convertie (JSON.stringify) en chaine de caractere
+  persistCartItems() {
+    this.storage.setItem('cartItems', JSON.stringify(this.cartItems));
+  }
+  
 
   logCartData(totalPriceValue: number, totalQuantityValue: number) {
 

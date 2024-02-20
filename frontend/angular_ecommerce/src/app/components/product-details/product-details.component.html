@@ -3,7 +3,7 @@
 
     <div class="details-container">
 
-        <div><h4>{{product.typePeau}}</h4></div>
+        <div><h4>{{product.applicationType}}</h4></div>
 
         <h3>{{product.name}}</h3>
         <h4>{{product.subname}}</h4>
@@ -19,7 +19,7 @@
 
         <p class="introduction">{{product.introduction}}</p>
         
-        <h4>Produit de {{product.poids}}gr</h4>
+        <h4>Produit de 100gr</h4>
         <div class="price"> <p>{{product.unitPrice| currency :'USD'}}</p></div>
 
         <button (click)="addToCart()" class="btn">Ajouter au panier</button>

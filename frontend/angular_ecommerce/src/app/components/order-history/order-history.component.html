@@ -1,0 +1,23 @@
+<h3>Vos commandes</h3>
+
+<div *ngIf="orderHistoryList.length > 0">
+    <table>
+    <tr>
+        <th>Order Tracking number</th>
+        <th>Total Price</th>
+        <th>Total Quantity</th>
+        <th>Date</th>
+    </tr> 
+    
+    <tr *ngFor="let tempOrderhistory of orderHistoryList">
+        <td>{{tempOrderhistory.orderTrackingNumber}}</td>
+        <td>{{tempOrderhistory.totalPrice | currency : 'USD'}}</td>
+        <td>{{tempOrderhistory.totalQuantity}}</td>
+        <td>{{tempOrderhistory.dateCreated | date: 'medium'}}</td>
+    </tr>
+    </table>
+</div>
+
+<div *ngIf="orderHistoryList.length == 0"> 
+    <p> Vos n'avez pas de commande</p>
+</div>

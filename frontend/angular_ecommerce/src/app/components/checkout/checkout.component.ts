@@ -30,6 +30,8 @@ export class CheckoutComponent implements OnInit {
 
   shippingAddressStates: State[] = [];
   billingAddressStates: State[] = [];
+
+  storage : Storage = sessionStorage;
   
   
   constructor(private formBuilder: FormBuilder,
@@ -41,6 +43,9 @@ export class CheckoutComponent implements OnInit {
   ngOnInit(): void {
     
     this.reviewCartDetails();
+
+    //adresse mail du storage
+    const theEmail = JSON.parse(this.storage.getItem('userEmail')!);
 
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({
@@ -54,7 +59,7 @@ export class CheckoutComponent implements OnInit {
                                Validators.minLength(2), 
                                SiteValidators.notOnlyWhitespace]),
                                
-        email: new FormControl('',
+        email: new FormControl(theEmail,
                               [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')])
       }),
       shippingAddress: this.formBuilder.group({
@@ -183,65 +188,63 @@ export class CheckoutComponent implements OnInit {
       return;
     }
 
-    //set up order
+    // set up order
     let order = new Order();
     order.totalPrice = this.totalPrice;
     order.totalQuantity = this.totalQuantity;
 
-    //get cart Items
+    // get cart items
     const cartItems = this.cartService.cartItems;
 
-    //creer orderItems from CartItem (2facon de faire 1traditionnel)
-    //traditionelle
-    let orderItems : OrderItem[] = [];
-    for(let i=0; i<cartItems.length; i++){
-      orderItems[i]= new OrderItem(cartItems[i]);
+    // create orderItems from cartItems
+    // - long way
+    let orderItems: OrderItem[] = [];
+    for (let i=0; i < cartItems.length; i++) {
+      orderItems[i] = new OrderItem(cartItems[i]);
     }
-    //meme chose (+ courte?)
-    //let order : OrderItem[] = cartItems.map(tempCartItem => new OrderItem(tempCartItem));
 
-    //set up Purchase
+    // - short way of doing the same thingy
+    //let orderItems: OrderItem[] = cartItems.map(tempCartItem => new OrderItem(tempCartItem.imageUrl!, tempCartItem.unitPrice!, tempCartItem.quantity, tempCartItem.id!));
+
+    // set up purchase
     let purchase = new Purchase();
-
-    //populate purchase - customer
+    
+    // populate purchase - customer
     purchase.customer = this.checkoutFormGroup.controls['customer'].value;
-
-    //populate purchase - shipping Address
+    
+    // populate purchase - shipping address
     purchase.shippingAddress = this.checkoutFormGroup.controls['shippingAddress'].value;
-    const shippingState : State = JSON.parse(JSON.stringify(purchase.shippingAddress.state));
-    const shippingCountry : Country = JSON.parse(JSON.stringify(purchase.shippingAddress.country));
+    const shippingState: State = JSON.parse(JSON.stringify(purchase.shippingAddress.state));
+    const shippingCountry: Country = JSON.parse(JSON.stringify(purchase.shippingAddress.country));
     purchase.shippingAddress.state = shippingState.name;
     purchase.shippingAddress.country = shippingCountry.name;
 
-
-    //populate purchase - billin address
+    // populate purchase - billing address
     purchase.billingAddress = this.checkoutFormGroup.controls['billingAddress'].value;
-    const billingState : State = JSON.parse(JSON.stringify(purchase.billingAddress.state));
-    const billingCountry : Country = JSON.parse(JSON.stringify(purchase.billingAddress.country));
+    const billingState: State = JSON.parse(JSON.stringify(purchase.billingAddress.state));
+    const billingCountry: Country = JSON.parse(JSON.stringify(purchase.billingAddress.country));
     purchase.billingAddress.state = billingState.name;
     purchase.billingAddress.country = billingCountry.name;
-
-    //populate purchase - order et OrderItems
+  
+    // populate purchase - order and orderItems
     purchase.order = order;
     purchase.orderItems = orderItems;
 
-    //appeler l'API via le checkoutService
-    this.checkoutService.placeOrder(purchase).subscribe(
-      {
-         next: response => {
-          alert(`Your order has been received.\n Order trackig number : ${response.orderTrackingNumber}`);
+    // call REST API via the CheckoutService
+    this.checkoutService.placeOrder(purchase).subscribe({
+        next: response => {
+          alert(`Your order has been received.\nOrder tracking number: ${response.orderTrackingNumber}`);
 
-          //reset Card
+          // reset cart
           this.resetCart();
 
-         },
-         error: err =>{
-          alert(`there was an error : ${err.message}`);
-         }
+        },
+        error: err => {
+          alert(`There was an error: ${err.message}`);
+        }
       }
-    )
+    );
 
-  
   }
 
   resetCart() {
@@ -283,7 +286,7 @@ export class CheckoutComponent implements OnInit {
     );
   }
 
-  getStates(formGroupName: string) {
+getStates(formGroupName: string) {
 
     const formGroup = this.checkoutFormGroup.get(formGroupName);
 
