@@ -50,20 +50,6 @@ p{
 
 
 a{
-    display:inline-block;
     cursor: pointer;
 }
 
-button{
-    border:none;
-    background:var(--light-pink);
-    padding: 5px 20px;
-    font-family: var(--josephin-font);
-    font-weight: 900;
-    font-size: 20px;
-    border-radius: 10px;
-    box-shadow: 3px 3px 3px rgba(0,0,0,0.7);
-}
-button:hover{
-    background-color: var(--main-pink);
-}

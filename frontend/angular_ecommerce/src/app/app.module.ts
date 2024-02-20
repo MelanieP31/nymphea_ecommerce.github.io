@@ -22,6 +22,9 @@ import { OktaAuthModule, OktaCallbackComponent, OKTA_CONFIG, OktaAuthGuard } fro
 import { OktaAuth } from '@okta/okta-auth-js';
 import myAppConfig from './config/my-app-config';
 import { OrderHistoryComponent } from './components/order-history/order-history.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+
+import {MatToolbarModule, MatButtonModule, MatIconModule} from '@angular/material';
 
 const oktaConfig = myAppConfig.oidc;
 const oktaAuth = new OktaAuth(oktaConfig);
@@ -60,7 +63,8 @@ const routes: Routes = [
     CheckoutComponent,
     LoginComponent,
     LoginStatusComponent,
-    OrderHistoryComponent
+    OrderHistoryComponent,
+    NavbarComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -68,7 +72,10 @@ const routes: Routes = [
     HttpClientModule,
     NgbModule,
     ReactiveFormsModule,
-    OktaAuthModule
+    OktaAuthModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [ProductService, {provide : OKTA_CONFIG, useValue :{oktaAuth}}],
   bootstrap: [AppComponent]

@@ -44,10 +44,7 @@ public class Product {
 	
 	@Column(name="description")
 	private String description;
-	
-	@Column(name="application_type")
-	private String applicationType;
-	
+
 	@Column(name="unit_price")
 	private BigDecimal unitPrice;
 	

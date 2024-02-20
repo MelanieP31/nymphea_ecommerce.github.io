@@ -8,7 +8,6 @@ export class Product {
         public description : string,
         public unitPrice : number,
         public imageUrl : string, 
-        public applicationType : string,
         public ingredients : string,
         public active : boolean, 
         public unitsInStock : number,
