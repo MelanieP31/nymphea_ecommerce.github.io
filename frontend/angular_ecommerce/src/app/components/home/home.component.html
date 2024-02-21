@@ -12,89 +12,69 @@
             </div>
 
             <div class="header-text">
-                <h2> Avec nos savons et autres cosmétiques naturels </h2>
+                <h2> Nous fabriquons des cosmétiques à partir d'huiles végétale bio et d'ingrédients naturels, sans
+                    additif ! </h2>
             </div>
 
             <div class="header-text">
                 <a routerLink="/products">
-                    <button> Nos produits </button>
+                    <button>
+                        <span>Voir nos produits <i class="fa-solid fa-chevron-right"></i> </span>
+                    </button>
                 </a>
             </div>
 
         </div>
 
-
-    </section>
-    
-    <section class="logo">
-
         <div class="logo-container">
-            <div class = "logo-container-border">
-                <div class="logo-container-unit">
-                    <img src="../../../assets/images/icon/france.png">
-                    <h4>Fabriqué en France </h4>
-                    <p>Dans le sud de la France</p>
-                </div>               
+
+            <div class="logo-container-unit">
+                <img src="../../../assets/images/icon/france.png">
+                <h4>Fabriqué en France </h4>
             </div>
 
-            <div class = "logo-container-border">
-                <div  class="logo-container-unit">
-                    <img src="../../../assets/images/icon/handmade.png" alt="main">
-                    <h4>Fait Main</h4>
-                    <p>Fait par nos petites mains</p>
-                </div>
+            <div class="logo-container-unit">
+                <img src="../../../assets/images/icon/main.png" alt="main">
+                <h4>Fait Main</h4>
             </div>
 
-            <div class = "logo-container-border">
-                <div  class="logo-container-unit">
-                    <img src="../../../assets/images/icon/vegan.png" alt="vegan">
-                    <h4>Vegan</h4>
-                    <p>Sans prodits animal et non testé sur les animaux </p>
-                </div>
+            <div class="logo-container-unit">
+                <img src="../../../assets/images/icon/plastique.png" alt="sac plastique">
+                <h4>Sans plastique</h4>
             </div>
 
-            <div class = "logo-container-border">
-                <div class="logo-container-unit">
-                    <img src="../../../assets/images/icon/bottleinterdit.png" alt="plastique">
-                    <h4>Sans plastique</h4>
-                    <p> Aucun plastiques </p>
-                </div>
-            </div>
-
-            <div class = "logo-container-border">
-                <div class="logo-container-unit">
-                    <img src="../../../assets/images/icon/3perso.png" alt="famille">
-                    <h4>Petite entreprise</h4>
-                    <p>Fabrique familliale</p>
-                </div>
+            <div class="logo-container-unit">
+                <img src="../../../assets/images/icon/palme.png" alt="plastique">
+                <h4>Sans huile de palme</h4>
             </div>
 
         </div>
+
 
     </section>
 
     <section class="produits">
         <h1>Découvrez nos produits !</h1>
 
-       <div >
+        <div>
             <div class="produits-container">
-                <div *ngFor="let tempProduct of products">
+                <div *ngFor="let tempProduct of products | slice:2">
                     <div class="product-box">
-                        <a routerLink="/products/{{tempProduct.id}}"> 
+                        <a routerLink="/products/{{tempProduct.id}}">
                             <img src="{{ tempProduct.imageUrl }}" class="product-box-img">
-                        </a>   
-                        <a routerLink="/products/{{tempProduct.id}}"> 
+                        </a>
+                        <a routerLink="/products/{{tempProduct.id}}">
                             <h3>"{{ tempProduct.name }}"</h3>
-                        </a> 
+                        </a>
                         <br>
-                        <a routerLink="/products/{{tempProduct.id}}"> 
+                        <a routerLink="/products/{{tempProduct.id}}">
                             <p>{{ tempProduct.subname }}</p>
-                        </a>                     
-                    </div>   
+                        </a>
+                    </div>
                 </div>
             </div>
-           
-        </div> 
+
+        </div>
 
         <!-- produit not found : display message -->
         <div *ngIf="products?.length ==0" role="alert">
@@ -104,21 +84,21 @@
         <div class="produits-footer">
             <p> Et découvrez encore plus de nos produits !!! </p>
             <a routerLink="/products">
-                <button> Tout nos produits </button>
+                <button> <span>Tout nos produits</span> </button>
             </a>
-            
+
         </div>
 
     </section>
 
     <section class="dernier-ajout">
-        <h1> Notre dernier ajout </h1>
+        <h1> Notre produit phare du moment </h1>
 
         <div class="dernier-ajout-container">
-            <img src="../../../assets/images/products/nouveau/placeholder6.png" alt="">
+            <img src="../../../assets/images/products/savon/placeholder2.png" alt="">
 
             <h3>"Bonne Mine"</h3>
-            <p>Spéciale été : orange, citron et carotte 
+            <p>Spéciale été : orange, citron et carotte
                 Pour plein de vitamine et un teint lumineux !
             </p>
 
@@ -139,32 +119,38 @@
             <div class="blog-container-text">
                 <h2> Vos soins, nos produits </h2>
 
-                <p>Vous voulez savoir exactement ce que ous mettez sur votre peaux ou dans vos cheveux ? Nos ingérdients ne sont pas un secret! 
-                    Apprenez à nous connaitre, suivez notre histoire. 
-                    Renseignez-vous sur les bienfaits des savons solide et des crèmes avec des ingrédients bio sélectionnez avec soin.
+                <p>Vous voulez savoir exactement ce que ous mettez sur votre peaux ou dans vos cheveux ? Nos ingérdients
+                    ne sont pas un secret!
+                    Apprenez à nous connaitre, suivez notre histoire.
+                    Renseignez-vous sur les bienfaits des savons solide et des crèmes avec des ingrédients bio
+                    sélectionnez avec soin.
                 </p>
-        
+
                 <h4> Qui sommes nous ?</h4>
                 <h4> Quels ingédients utilises-t-on ?</h4>
                 <h4> Connaitre nos recettes ?</h4>
 
-                <button>Notre Blog</button>
+                <button><span>Contact</span></button>
             </div>
 
         </div>
 
-        
+
 
     </section>
 
     <section class="newsletter">
         <div class="newsletter-form-container">
-            <h3>Pour être au courant de nos nouveaux produits et recevoir des offres exclusives sur nos nouvelles recettes !</h3>
+            <h3>Pour être au courant de nos nouveaux produits et recevoir des offres exclusives sur nos nouvelles
+                recettes !</h3>
 
             <div class="newsletter-form">
-                <label for="email" class="newsletter-form">E-mail</label>
-                <input type="email" id="email" size="30" required>
-                <input type="submit" value="S'inscrire">
+                <form action="">
+                    <label for="email" class="newsletter-form">E-mail</label>
+                    <input type="email" id="email" size="20" required>
+                    <input type="submit" value="S'inscrire">
+                </form>
+
             </div>
 
         </div>

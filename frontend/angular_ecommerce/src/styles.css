@@ -20,15 +20,15 @@
 }
 
 h1{
-    font-family: var(--josephin-font);
+    font-family: var(--raleway);
     font-weight: 900;
-    font-size:44px;
+    font-size:64px;
     margin-bottom: 5px;
 }
 
 h2{
-    font-family: var(--raleway);
-    font-size:22px;
+    font-family: var(--josephin-font);
+    font-size:28px;
     font-weight:400;
 }
 
@@ -51,5 +51,21 @@ p{
 
 a{
     cursor: pointer;
+}
+
+button{
+    background-color: white;
+    box-shadow: 2px 3px 4px rgba(0, 0, 0, 0.5);
+    border-style: none;
+    border-radius: 10px;
+    padding : 5px 10px 5px 10px;
+    cursor: pointer;
+}
+button:hover{
+    background-color: #f0f0f0;
+}
+button span{
+    font-family: var(--raleway);
+    font-size: 22px;
 }
 

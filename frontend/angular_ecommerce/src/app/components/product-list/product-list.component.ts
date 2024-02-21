@@ -86,7 +86,7 @@ export class ProductListComponent implements OnInit {
       this.currentCategoryName = 'Savon';
     }
 
-    //Changement de catgéorie : réinitialisement des pages à 1.
+    //Changement de catégorie : réinitialisement des pages à 1.
     if(this.previousCategoryId != this.currentCategoryId){
       this.thePageNumber =1;
     }

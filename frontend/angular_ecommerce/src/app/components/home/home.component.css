@@ -14,17 +14,17 @@
 }
 
 /* Banniere de page d'accueil */
-.header{
+
+.header-text-container{
     background-image: url(../../../assets/images/banner.png);
     background-size: cover;
+
 }
 .header p{
     font-family: 'Qwitcher Grypen', cursive;
     font-size: 150px;
     color:rgba(122,122,122,0.5);
-    padding-left: 100px;
-    padding-bottom: 50px;
-    padding-top: 85px;
+    padding : 50px 50px 50px 85px;
     transform:rotate(-4.5deg);
 }
 .header-text{
@@ -34,54 +34,52 @@
     color: rgba(0, 0, 0, 0.7);
     text-align: left;
     border: none;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     padding: 0;
+}
+.header-text h2{
+    width : 50%;
 }
 .header-text button{
     margin-top: 60px;
-    margin-bottom: 90px;
+    margin-bottom: 190px;
 }
 
 /* Section logo mise en avant */
-.logo{
-    display: flex;
-    align-items: center;
-    height: 140px;
-}
+
 .logo-container{
     display: flex;
     align-items: center;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.7);
-    width: 100%;  
-}
-.logo-container-border{
-    border-radius: 50%;
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.7);
-    padding : 5px;
+    width: 60%;  
     margin: auto;
-    margin-bottom : 5px;
-    background-color: #f5f5f5;  
+    border-radius: 50px;
+    background-color: white;
+    height: 150px;
+
 }
 .logo-container-unit{
-    width : 132px;
-    height: 120px;
-    text-align:center;   
+    width : 200px;
+    height: auto;
+    text-align:center; 
+    padding : 5px;
+    margin: auto;
+    margin-bottom : 5px;  
 }
 .logo-container-unit img{
-    height: 50px;
-    width :auto;
+    height: auto;
+    width :100px;
 }
-.logo-container-unit p {
-    font-size: 12px;
-    margin-top: 5px;
-    margin-bottom: 5px;  
-}
+
 
 /* Section mise en avant de produits */
 .produits{
     height : auto;
     margin: 70px;
     padding: 10px;
+}
+.produits h1{
+    margin-top: 100px;
 }
 .produits-container{
     display:flex;
@@ -185,8 +183,6 @@
 /*Section newsletter*/
 .newsletter{
     height : auto;
-    margin: 70px;
-    padding: 10px;
 }
 .newsletter-form-container h3{
     text-align: center;
@@ -196,15 +192,19 @@
     margin-bottom: 50px;
 }
 .newsletter-form{
+    text-align: center;
     margin-bottom: 30px;
-    display: inline;
 }
-.newsletter-form label{
-    margin-right : 20px;
+form{
+    margin: auto;
 }
-.newsletter-form input{
-    margin-right: 20px;
+form label{
+    margin:0px 10px 20px 10px;
 }
+form input{
+    margin-right:10px;
+}
+
 
 /*bandeau*/
 .bandeau{
@@ -224,5 +224,5 @@
     margin: auto;
 }
 .bandeau-icon img{
-    width :100px;
+    width :50px;
 }
