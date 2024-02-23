@@ -25,6 +25,8 @@ public class ProductCategory {
 	@Column(name="category_name")
 	private String categoryName;
 	
+	//Relation avec le set product (1 categorie pls produits) set de product mappé dans category (le nom qu'on va donner dans l'entité prduit).
+	//Cascade : perform une action sur une entité, cela se répercute sur l'entité associé
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="category")
 	private Set<Product> products;
 	

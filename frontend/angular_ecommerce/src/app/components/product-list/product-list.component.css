@@ -61,4 +61,14 @@ hr{
     text-align:center;
 }
 
+/*Pagination*/
+.pagination-container-borne{
+    display: flex;
+    justify-content: center;
+}
+.pagination-container{
+    text-align: center;
+    margin: auto;
+}
+
 

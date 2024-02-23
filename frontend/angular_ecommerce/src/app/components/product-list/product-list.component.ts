@@ -16,14 +16,14 @@ export class ProductListComponent implements OnInit {
   searchMode : boolean = false;
 
   //Chercher par catégorie (et afficher nom de la categorie)
-  currentCategoryId: number = 1;
+  currentCategoryId: number =1;
   currentCategoryName: string = "";
   //Reinitialisation page au changement de categorie
-  previousCategoryId: number = 1
+  previousCategoryId: number = 1;
   
   //Afficher la pagination 
-  thePageNumber : number = 1;
-  thePageSize : number = 12;
+  thePageNumber : number;
+  thePageSize : number = 5;
   theTotalElements : number = 0; 
 
   //Pagination pour la recherche par mot clé
@@ -63,7 +63,7 @@ export class ProductListComponent implements OnInit {
     this.previousKeyword = theKeyword;
     console.log(`keyword=${theKeyword}, the PageNumber=${this.thePageNumber}`);
 
-
+//Méthode du productservice : ramene un tableau des produits 
     this.productService.searchProductsPaginate(this.thePageNumber -1,
                                             this.thePageSize,
                                             theKeyword).subscribe(this.processResult());
@@ -96,7 +96,8 @@ export class ProductListComponent implements OnInit {
     console.log(`currentCategoryId = ${this.currentCategoryId}, thePageNumber=${this.thePageNumber} `);
 
     //afficher la liste des produits et l'afficher avec une pagination (recup donnee du ProductService et les assigné en fonction du JSON (param cette class = param JSON))
-    this.productService.getProductListPaginate(this.thePageNumber-1, 
+    //param thePageNumber-1 : Spring basé sur 0, alors que angular 1 (donc faut faire -1)
+    this.productService.getProductListPaginate(this.thePageNumber -1, 
                                               this.thePageSize, 
                                               this.currentCategoryId).subscribe(this.processResult());
   }
@@ -109,10 +110,11 @@ export class ProductListComponent implements OnInit {
 
   }
 
+  //gauche : propriété assigner sur la page , droite : ce qui revient du JSON
   processResult(){
     return(data:any) => {
       this.products = data._embedded.products;
-      this.thePageNumber = data.page.number +1;
+      this.thePageNumber = data.page.number + 1;
       this.thePageSize = data.page.size;
       this.theTotalElements = data.page.totalElements;
     };

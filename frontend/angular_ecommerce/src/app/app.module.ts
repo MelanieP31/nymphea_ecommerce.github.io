@@ -30,13 +30,14 @@ const oktaConfig = myAppConfig.oidc;
 const oktaAuth = new OktaAuth(oktaConfig);
 
 const routes: Routes = [
-
+//path: ... = le chemin a faire correspondre (pas de /), et le component associé
+//L'ordre est important : le premier match gagne (le plus spécifique vers le plus générique)
   {path: 'login/callback', component: OktaCallbackComponent},
   {path: 'login', component: LoginComponent},
 
   {path: 'checkout', component: CheckoutComponent},
   {path: 'cart-details', component: CartDetailsComponent},
-  {path: 'products/:id', component: ProductDetailsComponent},
+  {path: 'products/:id', component: ProductDetailsComponent},///:id =parameters
   {path: 'search/:keyword', component: ProductListComponent},
   {path: 'category/:id', component: ProductListComponent},
   {path: 'category', component: ProductListComponent},
@@ -45,8 +46,8 @@ const routes: Routes = [
 
   {path : 'order-history', component: OrderHistoryComponent, canActivate: [OktaAuthGuard]},
 
-  {path: '', redirectTo: '/home', pathMatch: 'full'},
-  {path: '**', redirectTo: '/home', pathMatch: 'full'}
+  {path: '', redirectTo: '/home', pathMatch: 'full'},//si aucun path est donné redirect vers home (la besoin /) full=exactement vers home (sinon risque de boucle infini angular.io)
+  {path: '**', redirectTo: '/home', pathMatch: 'full'}//générique : si aucune path correspond alors amener a home (on peut la faire mener avec un component 404notfound personnalisé)
 
 ];
 

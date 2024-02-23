@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ProductCategory } from '../common/product-category';
 
+//Recupere les donnes de l'API on observable dans des tableaux. "redistribuer"/assigner apres dans les composants necessaire.
 @Injectable({
   providedIn: 'root'
 })
@@ -15,19 +16,19 @@ export class ProductService {
 
   constructor(private httpClient: HttpClient) { }
 
-  // Retourne 1 produit par son Id
+  // Retourne 1 produit par son Id (detail view du produit)
   getProduct(theProductId: number) : Observable<Product>  { 
     const productUrl = `${this.baseUrl}/${theProductId}`;
     return this.httpClient.get<Product>(productUrl);
   }
 
-  //Rechercher un produit par sa catégorie
+  //Rechercher un produit par sa catégorie (retourne liste de produit dans une catégorie)
   getProductList(theCategoryId: number): Observable<Product[]> {
     const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${theCategoryId}`;
     return this.getProducts(searchUrl);
   }
 
-  //Recherche un produit par mot clé
+  //Recherche un produit par mot clé(retourne liste de produits searchbar)
   searchProducts(theKeyword: string) : Observable<Product[]>{
     const searchUrl =`${this.baseUrl}/search/findByNameContaining?name=${theKeyword}`;
     return this.getProducts(searchUrl);
@@ -40,7 +41,7 @@ export class ProductService {
     );
   }
 
-  //Retourne toutes les catégories
+  //Retourne toutes les catégories (appler le endpoint de categorie de l'API - créer avec SB) les faire passer dans un pipe(map) pour qu'on puisse les lire ici (interface pour les transfo en tableau)
   getProductCategories(): Observable<ProductCategory[]> {
     return this.httpClient.get<GetResponseProductCategory>(this.categoryUrl).pipe(
       map(response => response._embedded.productCategory)
@@ -66,7 +67,7 @@ export class ProductService {
 }
 
 
-
+//recup metadata
 
 interface GetResponseProducts {
   _embedded: {

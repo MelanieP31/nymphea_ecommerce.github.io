@@ -82,13 +82,16 @@ img{
     margin-right: 30px;
     box-shadow: none;
     background-color: #f5f5f5;
-
+}
+.button button:hover{
+    text-decoration: underline;
 }
 
 /*retour*/
 .retour{
-    justify-content: center;
+    text-align: center;
     margin: auto;
+    margin-bottom: 30px;
 }
 .retour a {
     color:black;

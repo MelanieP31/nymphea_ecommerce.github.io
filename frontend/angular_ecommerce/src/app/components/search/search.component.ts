@@ -17,5 +17,7 @@ export class SearchComponent implements OnInit {
     console.log(`value=${value}`);
     this.router.navigateByUrl(`/search/${value}`);
   }
+  //juste chercher value (=keyword) apres endpoint search (dans app.modul.ts search/:keyword)
+  //Reste gérer par product-list.component.ts
 
 }

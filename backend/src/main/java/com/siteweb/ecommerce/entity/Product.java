@@ -16,6 +16,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
+//Annotation Table pour se référer au nom dans la bdd
+//Annotation Data permet de générer automatiquement les getters/setters
 @Entity
 @Table(name="product")
 @Data
@@ -26,8 +28,9 @@ public class Product {
 	@Column(name="id")
 	private Long Id;
 	
+	//Lié à category (contient la foreign clé de category) precisé le nom de la colonne jointe category_id
 	@ManyToOne
-	@JoinColumn(name = "category_id", nullable = false)
+	@JoinColumn(name = "category_id", nullable = false) //ne peut pas etre null
 	private ProductCategory category;
 	
 	@Column(name="sku")
@@ -61,6 +64,7 @@ public class Product {
 	private int unitsInStock;
 	
 	@Column(name="date_created")
+	//Speciale annotation pour que springboot manage automatiquelent les date de creation et d'update.
 	@CreationTimestamp
 	private Date dateCreated;
 	

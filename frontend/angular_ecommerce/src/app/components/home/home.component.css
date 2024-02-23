@@ -6,7 +6,7 @@
     margin-top:20px;
     margin-bottom: 30px;
     color:#717e74;
-    font-size: 32px;
+    font-size: 28px;
     text-align: center;
     padding: 10px;
     border-top: 1px solid #717e74;
@@ -15,7 +15,7 @@
 
 /* Banniere de page d'accueil */
 
-.header-text-container{
+.header-section{
     background-image: url(../../../assets/images/banner.png);
     background-size: cover;
 
@@ -24,11 +24,11 @@
     font-family: 'Qwitcher Grypen', cursive;
     font-size: 150px;
     color:rgba(122,122,122,0.5);
-    padding : 50px 50px 50px 85px;
+    padding : 10px 50px 50px 0px;
     transform:rotate(-4.5deg);
 }
-.header-text{
-    padding-left: 100px;
+.header-text-container{
+    padding-left: 150px;
 }
 .header-text h1{
     color: rgba(0, 0, 0, 0.7);
@@ -38,11 +38,32 @@
     padding: 0;
 }
 .header-text h2{
-    width : 50%;
+    width : 70%;
+    margin-bottom: 20px;
 }
 .header-text button{
     margin-top: 60px;
-    margin-bottom: 190px;
+    margin-bottom: 40px;
+}
+
+.header-img img{
+    width: 150px;
+    height: 110px;
+    margin-right: 50px;
+    border-radius: 20px;
+    border: solid 1px #ffd89c;
+    box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.1);    
+}
+
+/*photo banner*/
+.header{
+    display: flex;
+}
+.header-photo img{
+    width: 450px;
+    height: auto;
+    margin-top:100px;
+    margin-right: 300px;
 }
 
 /* Section logo mise en avant */
@@ -171,7 +192,6 @@
 }
 .blog-container-text p{
     margin-bottom: 20px;
-    font-size: 14px;
 }
 .blog-container-text h4{
     padding:5px;
@@ -197,12 +217,20 @@
 }
 form{
     margin: auto;
+    font-family: var(--josephin-font);
+    font-size: 24px;
 }
 form label{
     margin:0px 10px 20px 10px;
 }
 form input{
     margin-right:10px;
+    padding: 1px 10px 1px 10px;
+    border: solid 0.5px black;
+    border-radius: 15px;
+}
+form input:first-child{
+    border:none;
 }
 
 

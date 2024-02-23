@@ -1,30 +1,45 @@
 <body class="main-page">
 
-    <section class="header">
+    <section class="header-section">
 
-        <div class="header-text-container">
-            <div>
-                <p>Bonjour</p>
+        <div class="header">
+            <div class="header-text-container">
+                <div>
+                    <p>Bonjour</p>
+                </div>
+    
+                <div class="header-text">
+                    <h1>Prenez soin de votre peau</h1>
+                </div>
+    
+                <div class="header-text">
+                    <h2> Nous fabriquons des cosmétiques à partir d'huiles végétale bio et d'ingrédients naturels, sans
+                        additif ! </h2>
+                </div>
+                
+                <div class="header-img">
+                    <img src="../../../assets/images/saopgreen.png" alt="savon vert">
+                    <img src="../../../assets/images/argile.jpg" alt="">
+                    <img src="../../../assets/images/creme.jpg" alt="">
+                </div>
+    
+                <div class="header-text">
+                    <a routerLink="/products">
+                        <button>
+                            <span>Voir nos produits <i class="fa-solid fa-chevron-right"></i> </span>
+                        </button>
+                    </a>
+                </div>
+    
             </div>
-
-            <div class="header-text">
-                <h1>Prenez soin de votre peau</h1>
-            </div>
-
-            <div class="header-text">
-                <h2> Nous fabriquons des cosmétiques à partir d'huiles végétale bio et d'ingrédients naturels, sans
-                    additif ! </h2>
-            </div>
-
-            <div class="header-text">
-                <a routerLink="/products">
-                    <button>
-                        <span>Voir nos produits <i class="fa-solid fa-chevron-right"></i> </span>
-                    </button>
-                </a>
+    
+            <div class="header-photo">
+                <img src="../../../assets/images/banner-img.png" alt="">
             </div>
 
         </div>
+
+        
 
         <div class="logo-container">
 
@@ -146,9 +161,10 @@
 
             <div class="newsletter-form">
                 <form action="">
-                    <label for="email" class="newsletter-form">E-mail</label>
-                    <input type="email" id="email" size="20" required>
+                    <label for="email" class="newsletter-form">E-mail : </label>
+                    <input type="email" id="email" size="20" required placeholder="prenom.nom@mail.fr">
                     <input type="submit" value="S'inscrire">
+                    
                 </form>
 
             </div>
