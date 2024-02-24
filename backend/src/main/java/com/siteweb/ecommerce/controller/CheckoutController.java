@@ -14,11 +14,13 @@ import com.siteweb.ecommerce.service.CheckoutService;
 public class CheckoutController {
 
     private CheckoutService checkoutService;
-
+    
+    //constructor
     public CheckoutController(CheckoutService checkoutService) {
         this.checkoutService = checkoutService;
     }
 
+    //appeler le service
     @PostMapping("/purchase")
     public PurchaseResponse placeOrder(@RequestBody Purchase purchase) {
 

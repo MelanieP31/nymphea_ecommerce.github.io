@@ -13,6 +13,9 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+
+//Entité pour récupérer les commandes dans a database 
+
 @Entity
 @Table(name="order_item")
 @Getter
@@ -36,6 +39,7 @@ public class OrderItem {
 	@Column(name="product_id")
 	private Long productId;
 	
+	//Reference back de order (plusieur item dans une commande)
 	@ManyToOne
 	@JoinColumn(name="order_id")
 	private Order order;

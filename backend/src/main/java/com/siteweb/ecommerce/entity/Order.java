@@ -22,6 +22,10 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+
+//Entité pour récupérer les commandes dans a database
+
+
 @Entity
 @Table(name="orders")
 @Getter
@@ -45,7 +49,8 @@ public class Order {
 
 	    @Column(name="status")
 	    private String status;
-
+	    
+	    // Pour traquer les commandes
 	    @Column(name="date_created")
 	    @CreationTimestamp
 	    private Date dateCreated;
@@ -53,14 +58,19 @@ public class Order {
 	    @Column(name="last_updated")
 	    @UpdateTimestamp
 	    private Date lastUpdated;
-
+	    
+	    //Les relations avec les autres classes
+	    
+        // Une commande a plusieur produit commander (One to Many)
 	    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
 	    private Set<OrderItem> orderItems = new HashSet<>();
-
+	    
+	    //Plusieurs commande peuvent etre associé à un client (Many to One)
 	    @ManyToOne
 	    @JoinColumn(name = "customer_id")
 	    private Customer customer;
-
+	    
+	    //Une commande = Une adresse (OneToOne)  
 	    @OneToOne(cascade = CascadeType.ALL)
 	    @JoinColumn(name = "shipping_address_id", referencedColumnName = "id")
 	    private Address shippingAddress;
@@ -69,6 +79,8 @@ public class Order {
 	    @JoinColumn(name = "billing_address_id", referencedColumnName = "id")
 	    private Address billingAddress;
 
+	    
+	    //Méthode pour remplir le tableau des produits commander
 	    public void add(OrderItem item) {
 
 	        if (item != null) {

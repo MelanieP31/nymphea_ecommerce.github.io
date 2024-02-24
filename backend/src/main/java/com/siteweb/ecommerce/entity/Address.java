@@ -11,6 +11,10 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+
+//Entité pour récupérer les commandes dans a database
+
+
 @Entity
 @Table(name="address")
 @Getter
@@ -31,6 +35,7 @@ public class Address {
     @Column(name="zip_code")
     private String zipCode;
 
+    //relation : 1 adresse associé à 1 commande
     @OneToOne
     @PrimaryKeyJoinColumn
     private Order order;

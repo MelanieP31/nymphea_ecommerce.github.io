@@ -31,4 +31,8 @@ export class HomeComponent implements OnInit {
     )
   }
 
+  newsletterInscription(){
+    alert(`En cours d'implémentation`);
+  }
+
 }

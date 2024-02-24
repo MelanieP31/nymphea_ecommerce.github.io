@@ -150,6 +150,7 @@ export class CheckoutComponent implements OnInit {
     
   }
 
+  //Checkout button --> placeOrder()
   onSubmit() {
     console.log("Handling the submit button");
 
@@ -167,14 +168,10 @@ export class CheckoutComponent implements OnInit {
     const cartItems = this.cartService.cartItems;
 
     // create orderItems from cartItems
-    // - long way
     let orderItems: OrderItem[] = [];
     for (let i=0; i < cartItems.length; i++) {
       orderItems[i] = new OrderItem(cartItems[i]);
     }
-
-    // - short way of doing the same thingy
-    //let orderItems: OrderItem[] = cartItems.map(tempCartItem => new OrderItem(tempCartItem.imageUrl!, tempCartItem.unitPrice!, tempCartItem.quantity, tempCartItem.id!));
 
     // set up purchase
     let purchase = new Purchase();
@@ -195,6 +192,7 @@ export class CheckoutComponent implements OnInit {
 
     // call REST API via the CheckoutService
     this.checkoutService.placeOrder(purchase).subscribe({
+       //Success
         next: response => {
           alert(`Your order has been received.\nOrder tracking number: ${response.orderTrackingNumber}`);
 
@@ -202,6 +200,7 @@ export class CheckoutComponent implements OnInit {
           this.resetCart();
 
         },
+        //error
         error: err => {
           alert(`There was an error: ${err.message}`);
         }

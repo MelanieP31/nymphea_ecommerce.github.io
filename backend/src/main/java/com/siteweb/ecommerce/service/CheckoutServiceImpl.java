@@ -14,29 +14,40 @@ import com.siteweb.ecommerce.entity.OrderItem;
 
 import jakarta.transaction.Transactional;
 
+//anotation service
 @Service
+
+//implements checkoutservice : doit réécrire placeOrder.
 public class CheckoutServiceImpl implements CheckoutService {
 
-    private CustomerRepository customerRepository;
-
+    //Client a la commande, qui contient la liste des item : référentiel 
+	private CustomerRepository customerRepository;
+	
+	//Constructor pour injecter le customerRepository
     public CheckoutServiceImpl(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
+    
+    //ecrire la méthode placeOrder (recupérer du frontend le dto Purchase et envoyer le tracking number)
+    //1- on recup de purchase : order, orderItems, adresse et client.
+    //2- on dispach dans entité order (relation : il seront tous dispatcher)
+    //3-On sauvegarde dans bdd le client complet (by repositoryCustomer)
+    //4-on cré et on renvoie un numero de tracing unique
 
     @Override
     @Transactional
     public PurchaseResponse placeOrder(Purchase purchase) {
 
-        // retrieve the order info from dto
+        // recupérer the order info from dto
         Order order = purchase.getOrder();
 
         // generate tracking number
-        String orderTrackingNumber = generateOrderTrackingNumber();
-        order.setOrderTrackingNumber(orderTrackingNumber);
+        String orderTrackingNumber = generateOrderTrackingNumber(); //Méthode a écrire dessous
+        order.setOrderTrackingNumber(orderTrackingNumber); //Le mettre dans order
 
         // populate order with orderItems
-        Set<OrderItem> orderItems = purchase.getOrderItems();
-        orderItems.forEach(item -> order.add(item));
+        Set<OrderItem> orderItems = purchase.getOrderItems(); //les recup from dto
+        orderItems.forEach(item -> order.add(item)); //loop over chacun des order items et l'ajouter a order
 
         // populate order with billingAddress and shippingAddress
         order.setBillingAddress(purchase.getBillingAddress());

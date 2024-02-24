@@ -14,6 +14,11 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+//Entité pour récupérer les commandes dans a database
+//Récupérer les données Client et associé la commande
+
+
+
 @Entity
 @Table(name="customer")
 @Getter
@@ -33,10 +38,12 @@ public class Customer {
 
     @Column(name="email")
     private String email;
-
+    
+    //Un client peut avoir plusieurs commande
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private Set<Order> orders = new HashSet<>();
 
+    //Méthode ajouter de nvl commande a un client
     public void add(Order order) {
 
         if (order != null) {
