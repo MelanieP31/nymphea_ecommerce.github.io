@@ -25,6 +25,7 @@ import { OrderHistoryComponent } from './components/order-history/order-history.
 import { NavbarComponent } from './components/navbar/navbar.component';
 
 import {MatToolbarModule, MatButtonModule, MatIconModule} from '@angular/material';
+import { ContactComponent } from './components/contact/contact.component';
 
 const oktaConfig = myAppConfig.oidc;
 const oktaAuth = new OktaAuth(oktaConfig);
@@ -36,6 +37,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
 
   {path: 'checkout', component: CheckoutComponent},
+  {path:'contact', component:ContactComponent},
   {path: 'cart-details', component: CartDetailsComponent},
   {path: 'products/:id', component: ProductDetailsComponent},///:id =parameters
   {path: 'search/:keyword', component: ProductListComponent},
@@ -65,7 +67,8 @@ const routes: Routes = [
     LoginComponent,
     LoginStatusComponent,
     OrderHistoryComponent,
-    NavbarComponent
+    NavbarComponent,
+    ContactComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

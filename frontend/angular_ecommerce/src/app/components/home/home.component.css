@@ -45,7 +45,6 @@
     margin-top: 60px;
     margin-bottom: 40px;
 }
-
 .header-img img{
     width: 150px;
     height: 110px;
@@ -77,7 +76,6 @@
     border-radius: 50px;
     background-color: white;
     height: 150px;
-
 }
 .logo-container-unit{
     width : 200px;
@@ -92,15 +90,26 @@
     width :100px;
 }
 
-
-/* Section mise en avant de produits */
+/*Engagement*/
+.engagement-container{
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+    min-height: 200px;
+}
+.engagement-container h2{
+    margin-left: 100px;
+    margin-top: 50px;
+}
+.engagement-container p{
+    margin-left: 100px;
+}
+/* Section savon */
 .produits{
     height : auto;
     margin: 70px;
     padding: 10px;
 }
 .produits h1{
-    margin-top: 100px;
+    margin-top: 30px;
 }
 .produits-container{
     display:flex;
@@ -142,11 +151,15 @@
     margin :30px;
 }
 
+/*Banner-creme*/
+
 /*Section dernier ajout*/
 .dernier-ajout{
     height : auto;
     margin: 70px;
     padding: 10px;
+    background-image: url(../../../assets/images/Background-produits-phare.png);
+    background-size: contain;
 }
 .dernier-ajout-container{
     display: flex;

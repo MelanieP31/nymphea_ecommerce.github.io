@@ -1,13 +1,13 @@
 <div class="login-status-header">
 
     <div *ngIf="isAuthenticated && userFullName" class="login-status-user-info">
-        Welcome back {{ userFullName }}!
+        Bienvenue {{ userFullName }}!
     </div>
 
-    <div *ngIf="!isAuthenticated" routerLink="/login" class="security-btn"><i class="fa-solid fa-user"></i></div>
+    <div *ngIf="!isAuthenticated" routerLink="/login" class="security-btn"><i class="fa-regular fa-user"></i></div>
 
-    <div *ngIf="isAuthenticated" (click)="logout()" class="security-btn">Logout</div>
+    <div *ngIf="isAuthenticated" (click)="logout()" class="security-btn"><i class="fa-solid fa-user-slash"></i></div>
 
-    <div *ngIf="isAuthenticated" routerLink="/order-history" class="security-btn">Commandes</div>
+    <div *ngIf="isAuthenticated" routerLink="/order-history" class="security-btn"><i class="fa-solid fa-table-list"></i></div>
 
 </div>

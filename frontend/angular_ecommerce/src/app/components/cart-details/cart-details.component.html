@@ -1,68 +1,119 @@
 <div class="main-content">
+    <h2>
+        Panier d'achat
+    </h2>
 
     <div *ngIf="cartItems.length >0" class="section-article">
+
         <table class="table">
             <tr>
-                <th width="40%"></th>
-                <th width="30%"></th>
-                <th width="30%"></th>
+                <th width="60%">Produit(s)</th>
+                <th width="20%">Prix à l'unité</th>
+                <th width="20%">Total</th>
             </tr>
 
-            <tr *ngFor="let tempCartItem of cartItems">
-                <td>
-                    <img src="{{ tempCartItem.imageUrl}}">
-                </td>
-                <td>
-                    <h4>{{tempCartItem.name}}</h4>
-                    <p>{{tempCartItem.subname}}</p>
-                    <p class="price">{{tempCartItem.unitPrice}}</p>
-                </td>
-                <td>
-                    <div class="quantity">
-                        <div>
-                            <button (click)="incrementQuantity(tempCartItem)">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </div>
+            <tr *ngFor="let tempCartItem of cartItems" class="presentation">
+                <td class="presentation-container">
+                    <div class="presentation-img">
+                        <img src="{{ tempCartItem.imageUrl}}">
+                    </div>
+                    <div class="presentation-txt">
+                        <h4>{{tempCartItem.name}}</h4>
+                        <p>{{tempCartItem.subname}}</p>
 
-                        <div>
-                            <p>{{tempCartItem.quantity}}</p>
-                        </div>
+                        <div class="quantity">
+                            <div>
+                                <button (click)="incrementQuantity(tempCartItem)">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
 
-                        <div>
-                            <button (click)="decrementQuantity(tempCartItem)">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                        </div>
+                            <div>
+                                <p>{{tempCartItem.quantity}}</p>
+                            </div>
 
-                        <div class="quantity-suppr">
-                            <button (click)="remove(tempCartItem)">
-                                <i class="fa-solid fa-trash-can"></i>
-                            </button>
+                            <div>
+                                <button (click)="decrementQuantity(tempCartItem)">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+
+                            <div class="quantity-suppr">
+                                <button (click)="remove(tempCartItem)">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+                            </div>
+
                         </div>
 
                     </div>
-                    <p class="sous-total"> Sous-total: {{tempCartItem.quantity*tempCartItem.unitPrice | currency : 'USD'}} </p>
                 </td>
-            </tr>
 
-            <tr>
-                <td> </td>
-                <td> </td>
-                <td class="total">
-                    <hr>
-                    <p>Quantité total : {{ totalQuantity}}</p>
-                    <p>Prix total : {{totalPrice | currency : 'USD'}}</p>
-                    <button><a routerLink="/checkout" class="btn">Checkout</a></button>
+                <hr>
+
+                <td>
+                    <p class="price">{{tempCartItem.unitPrice}}</p>
+
                 </td>
+
+                <td>
+                    <p class="sous-total"> Sous-total: {{tempCartItem.quantity*tempCartItem.unitPrice | currency
+                        :'USD'}} </p>
+                </td>
+
             </tr>
 
         </table>
+
+
+        <div class="total">
+            <h3>Résumé</h3>
+            
+            <p>Quantité total : {{ totalQuantity}}</p>
+            <p>TVA incluse 20%</p>
+            <p>Prix total : {{totalPrice | currency : 'USD'}}</p>
+
+            <div class="btn-checkout">
+                <button><a routerLink="/checkout" class="btn">Continuer</a></button>
+            </div>
+            <div class="icon">
+                <img src="../../../assets/images/icon/france.png" alt="">
+                <img src="../../../assets/images/icon/main.png" alt="">
+                <img src="../../../assets/images/icon/plastique.png" alt="">
+                <img src="../../../assets/images/icon/palme.png" alt="">
+            </div>
+
+            <div>
+                <p>Livraison 5 à 7 jours ouvrés (lundi au vendredi)</p>
+                <p>Fait en France</p>
+                <p>30 jours de droit de rétractations</p>
+            </div>
+            
+            
+        </div>
+
     </div>
 
     <div *ngIf="cartItems.length == 0" class="section-vide">
         <p>Votre panier est vide !! </p>
     </div>
+
+    <hr>
+
+    <div class="similaire">
+        <h3>Autres produits qui pourraient vous plaire</h3>
+
+        <p>Blablabla</p>
+
+    </div>
+
+    <hr>
+
+    <div class="btn-checkout">
+        <button a routerLink="/checkout">Checkout</button>
+    </div>
+
+
 
 
 

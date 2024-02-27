@@ -18,6 +18,16 @@ label{
     margin-top:5px;
 
 }
-.btn button{
+.text-center{
+    margin-bottom: 20px;
+}
+button{
     margin:10px auto 10px auto;
+    background-color: white;
+    border: solid 1px black;
+    font-size: 23px;
+}
+button:hover{
+    background-color: #f0f0f0;
+    border: solid 1px black;
 }

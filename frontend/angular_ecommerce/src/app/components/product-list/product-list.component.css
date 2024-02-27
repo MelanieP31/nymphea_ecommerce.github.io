@@ -71,4 +71,21 @@ hr{
     margin: auto;
 }
 
+/*Btn final*/
+.btn-achat{
+
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.btn-achat button{
+    width: 50%;
+    display: flex;
+    margin: auto;
+    justify-content: center;
+}
+.btn-achat a{
+    color: black;
+    text-decoration: none;
+}
+
 
